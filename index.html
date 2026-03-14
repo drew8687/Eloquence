@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Atelier Français — Préparation TCF, TEF-Canada & TECFÉE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --cream:#f5f0e8;
+  --cream2:#ede6d6;
+  --parch:#d9cdb8;
+  --ink:#1c1209;
+  --ink2:#3a2e1e;
+  --bordeaux:#7b1c2e;
+  --bordeaux2:#9e2b3f;
+  --gold:#b8860b;
+  --gold2:#d4a017;
+  --sage:#4a6741;
+  --sage2:#5d8050;
+  --muted:#7a6e5f;
+  --card:rgba(255,255,255,0.55);
+  --serif:'Cormorant Garamond',serif;
+  --body:'Libre Baskerville',serif;
+  --mono:'JetBrains Mono',monospace;
+}
+
+html{scroll-behavior:smooth}
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:15px;
+  line-height:1.75;
+  overflow-x:hidden;
+}
+
+/* subtle paper texture */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 3rem;
+  background:rgba(245,240,232,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--parch);
+}
+.nav-brand{
+  font-family:var(--serif);
+  font-size:1.25rem;
+  font-weight:700;
+  color:var(--bordeaux);
+  letter-spacing:0.02em;
+}
+.nav-brand span{color:var(--gold);font-style:italic}
+.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links a{
+  font-family:var(--mono);font-size:0.65rem;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--bordeaux)}
+.nav-score{
+  font-family:var(--mono);font-size:0.7rem;
+  color:var(--gold);
+  background:rgba(184,134,11,0.1);
+  border:1px solid rgba(184,134,11,0.3);
+  padding:0.3rem 0.8rem;border-radius:20px;
+}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:grid;place-items:center;
+  text-align:center;
+  padding:8rem 2rem 4rem;
+  position:relative;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(123,28,46,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(74,103,65,0.06) 0%, transparent 60%);
+  pointer-events:none;
+}
+.hero-ornament{
+  font-family:var(--serif);
+  font-size:1rem;
+  color:var(--gold);
+  letter-spacing:0.5em;
+  margin-bottom:1.5rem;
+  opacity:0;
+  animation:fadeUp 0.8s 0.2s forwards;
+}
+.hero-title{
+  font-family:var(--serif);
+  font-size:clamp(3.5rem,8vw,7rem);
+  font-weight:700;
+  line-height:1.0;
+  color:var(--ink);
+  margin-bottom:0.5rem;
+  opacity:0;
+  animation:fadeUp 0.9s 0.4s forwards;
+}
+.hero-title em{color:var(--bordeaux);font-style:italic}
+.hero-subtitle{
+  font-family:var(--serif);
+  font-size:clamp(1.1rem,2.5vw,1.6rem);
+  font-weight:300;
+  font-style:italic;
+  color:var(--muted);
+  max-width:50ch;
+  margin:0 auto 2.5rem;
+  opacity:0;
+  animation:fadeUp 0.9s 0.6s forwards;
+}
+.hero-badges{
+  display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  margin-bottom:3rem;
+  opacity:0;animation:fadeUp 0.9s 0.8s forwards;
+}
+.badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.5rem 1.2rem;
+  font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;
+  border-radius:2px;
+}
+.badge-tcf{background:rgba(123,28,46,0.1);color:var(--bordeaux);border:1px solid rgba(123,28,46,0.25)}
+.badge-tef{background:rgba(74,103,65,0.1);color:var(--sage);border:1px solid rgba(74,103,65,0.25)}
+.badge-b2{background:rgba(184,134,11,0.1);color:var(--gold);border:1px solid rgba(184,134,11,0.3)}
+.hero-cta{
+  display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  opacity:0;animation:fadeUp 0.9s 1s forwards;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.85rem 2rem;border-radius:2px;
+  font-family:var(--mono);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;
+  text-decoration:none;border:none;cursor:pointer;transition:all 0.25s;
+}
+.btn-primary{background:var(--bordeaux);color:var(--cream)}
+.btn-primary:hover{background:var(--bordeaux2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(123,28,46,0.3)}
+.btn-outline{background:transparent;color:var(--ink);border:1px solid var(--parch)}
+.btn-outline:hover{border-color:var(--ink);transform:translateY(-2px)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SCORE BANNER ── */
+.score-banner{
+  background:var(--cream2);
+  border-top:1px solid var(--parch);
+  border-bottom:1px solid var(--parch);
+  padding:1.5rem 3rem;
+}
+.score-inner{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;
+  align-items:center;
+}
+.score-item{text-align:center}
+.score-label{
+  font-family:var(--mono);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:0.3rem;
+}
+.score-val{
+  font-family:var(--serif);font-size:2rem;font-weight:700;
+  color:var(--bordeaux);
+}
+.score-total{font-size:1rem;color:var(--muted)}
+.score-bar-wrap{margin-top:0.4rem}
+.score-bar{height:3px;background:var(--parch);border-radius:2px;overflow:hidden}
+.score-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--bordeaux),var(--gold));width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+
+/* ── SECTIONS ── */
+main{position:relative;z-index:1}
+section{padding:6rem 2rem;max-width:1100px;margin:0 auto}
+.section-label{
+  font-family:var(--mono);font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--gold);display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem;
+}
+.section-label::before{content:'';width:2rem;height:1px;background:var(--gold)}
+.section-title{
+  font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);font-weight:700;
+  line-height:1.1;margin-bottom:2.5rem;
+}
+.section-title em{font-style:italic;color:var(--bordeaux)}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--parch);margin-bottom:2.5rem;overflow-x:auto}
+.tab{
+  padding:0.75rem 1.5rem;font-family:var(--mono);font-size:0.68rem;letter-spacing:0.12em;
+  text-transform:uppercase;cursor:pointer;color:var(--muted);
+  border-bottom:2px solid transparent;margin-bottom:-2px;
+  white-space:nowrap;transition:all 0.2s;background:none;border-top:none;border-left:none;border-right:none;
+}
+.tab:hover{color:var(--ink)}
+.tab.active{color:var(--bordeaux);border-bottom-color:var(--bordeaux)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* ── CARDS GRID ── */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+.card{
+  background:var(--card);
+  border:1px solid var(--parch);
+  border-radius:2px;padding:1.8rem;
+  backdrop-filter:blur(8px);
+  transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(28,18,9,0.1);border-color:var(--bordeaux2)}
+.card-icon{font-size:1.8rem;margin-bottom:1rem}
+.card-title{font-family:var(--serif);font-size:1.2rem;font-weight:700;margin-bottom:0.5rem}
+.card-desc{font-size:0.85rem;color:var(--muted);line-height:1.6}
+.card-tag{
+  display:inline-block;margin-top:1rem;
+  font-family:var(--mono);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;
+  padding:0.2rem 0.6rem;border-radius:2px;
+}
+.tag-comp{background:rgba(123,28,46,0.1);color:var(--bordeaux)}
+.tag-prod{background:rgba(74,103,65,0.1);color:var(--sage)}
+.tag-voc{background:rgba(184,134,11,0.1);color:var(--gold)}
+.tag-gram{background:rgba(60,80,140,0.1);color:#3c508c}
+
+/* ── QCM / QUIZ ── */
+.quiz-container{max-width:700px;margin:0 auto}
+.quiz-header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--parch);
+}
+.quiz-progress{
+  font-family:var(--mono);font-size:0.7rem;color:var(--muted);
+}
+.quiz-score-live{
+  font-family:var(--serif);font-size:1.2rem;color:var(--bordeaux);font-weight:700;
+}
+.question-card{
+  background:var(--card);border:1px solid var(--parch);
+  border-radius:2px;padding:2rem;margin-bottom:1.5rem;
+  animation:fadeUp 0.4s forwards;
+}
+.question-type{
+  font-family:var(--mono);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:0.8rem;
+}
+.question-text{
+  font-family:var(--serif);font-size:1.25rem;line-height:1.5;
+  margin-bottom:1.5rem;color:var(--ink);
+}
+.question-text em{font-style:italic;color:var(--bordeaux)}
+.options{display:flex;flex-direction:column;gap:0.75rem}
+.option{
+  display:flex;align-items:center;gap:1rem;
+  padding:0.85rem 1.2rem;
+  background:rgba(255,255,255,0.4);border:1px solid var(--parch);border-radius:2px;
+  cursor:pointer;transition:all 0.2s;
+  font-size:0.9rem;
+}
+.option:hover:not(.disabled){background:rgba(123,28,46,0.06);border-color:var(--bordeaux2)}
+.option.correct{background:rgba(74,103,65,0.12);border-color:var(--sage);color:var(--sage)}
+.option.wrong{background:rgba(123,28,46,0.1);border-color:var(--bordeaux);color:var(--bordeaux)}
+.option.disabled{cursor:default}
+.option-letter{
+  width:24px;height:24px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:0.65rem;font-weight:500;
+  background:var(--cream2);border:1px solid var(--parch);
+  flex-shrink:0;
+}
+.option.correct .option-letter{background:var(--sage);color:white;border-color:var(--sage)}
+.option.wrong .option-letter{background:var(--bordeaux);color:white;border-color:var(--bordeaux)}
+.feedback{
+  padding:1rem 1.2rem;border-radius:2px;margin-top:1rem;
+  font-size:0.88rem;line-height:1.6;display:none;
+}
+.feedback.show{display:block}
+.feedback.good{background:rgba(74,103,65,0.1);border-left:3px solid var(--sage);color:var(--sage)}
+.feedback.bad{background:rgba(123,28,46,0.08);border-left:3px solid var(--bordeaux);color:var(--bordeaux)}
+.quiz-nav{display:flex;gap:1rem;justify-content:center;margin-top:1.5rem}
+
+/* ── VOCABULAIRE ── */
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem}
+.vocab-card{
+  background:var(--card);border:1px solid var(--parch);border-radius:2px;
+  padding:1.4rem;cursor:pointer;transition:all 0.25s;
+  position:relative;overflow:hidden;
+}
+.vocab-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(123,28,46,0.05),transparent);
+  opacity:0;transition:opacity 0.3s;
+}
+.vocab-card:hover::before{opacity:1}
+.vocab-card:hover{border-color:var(--bordeaux);transform:translateY(-3px)}
+.vocab-word{font-family:var(--serif);font-size:1.3rem;font-weight:700;margin-bottom:0.3rem}
+.vocab-cat{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem}
+.vocab-def{font-size:0.82rem;color:var(--muted);line-height:1.5;font-style:italic}
+.vocab-example{font-size:0.82rem;margin-top:0.5rem;padding-top:0.5rem;border-top:1px solid var(--parch);color:var(--ink2)}
+.vocab-flip{
+  position:absolute;inset:0;background:var(--bordeaux);
+  color:var(--cream);padding:1.4rem;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  opacity:0;transform:rotateY(90deg);transition:all 0.3s;
+  font-family:var(--serif);font-size:0.95rem;
+}
+.vocab-card.flipped .vocab-flip{opacity:1;transform:rotateY(0)}
+
+/* ── GRAMMAIRE ── */
+.grammar-rule{
+  background:var(--card);border:1px solid var(--parch);
+  border-left:4px solid var(--bordeaux);
+  border-radius:2px;padding:1.5rem 1.8rem;margin-bottom:1.2rem;
+}
+.rule-title{font-family:var(--serif);font-size:1.1rem;font-weight:700;margin-bottom:0.8rem;color:var(--bordeaux)}
+.rule-body{font-size:0.88rem;line-height:1.7;color:var(--ink2)}
+.rule-example{
+  background:rgba(184,134,11,0.08);border:1px solid rgba(184,134,11,0.2);
+  border-radius:2px;padding:0.7rem 1rem;margin-top:0.8rem;
+  font-family:var(--serif);font-size:0.95rem;font-style:italic;
+}
+.rule-example strong{color:var(--bordeaux);font-style:normal}
+.rule-tip{
+  margin-top:0.8rem;padding:0.5rem 1rem;
+  background:rgba(74,103,65,0.08);border-left:3px solid var(--sage);
+  font-size:0.82rem;color:var(--sage);
+}
+
+/* ── EXPRESSION ÉCRITE ── */
+.writing-section{max-width:750px}
+.writing-prompt{
+  background:linear-gradient(135deg,rgba(123,28,46,0.06),rgba(184,134,11,0.04));
+  border:1px solid var(--parch);border-top:3px solid var(--bordeaux);
+  padding:2rem;margin-bottom:1.5rem;border-radius:2px;
+}
+.prompt-level{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem}
+.prompt-text{font-family:var(--serif);font-size:1.15rem;line-height:1.6;color:var(--ink)}
+.prompt-constraints{
+  margin-top:1rem;padding-top:1rem;border-top:1px solid var(--parch);
+  font-family:var(--mono);font-size:0.68rem;color:var(--muted);
+  display:flex;gap:1.5rem;flex-wrap:wrap;
+}
+.writing-area{
+  width:100%;min-height:200px;
+  background:white;border:1px solid var(--parch);border-radius:2px;
+  padding:1.2rem;font-family:var(--body);font-size:0.9rem;
+  line-height:1.8;color:var(--ink);resize:vertical;outline:none;
+  transition:border-color 0.2s;
+}
+.writing-area:focus{border-color:var(--bordeaux)}
+.writing-meta{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-top:0.8rem;
+}
+.word-count{font-family:var(--mono);font-size:0.68rem;color:var(--muted)}
+.connectors-box{
+  background:var(--cream2);border:1px solid var(--parch);
+  padding:1.2rem 1.5rem;border-radius:2px;margin-top:1.5rem;
+}
+.conn-title{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--bordeaux);margin-bottom:0.8rem}
+.conn-group{margin-bottom:0.8rem}
+.conn-label{font-family:var(--mono);font-size:0.6rem;color:var(--muted);margin-bottom:0.3rem;text-transform:uppercase;letter-spacing:0.1em}
+.conn-chips{display:flex;flex-wrap:wrap;gap:0.4rem}
+.chip{
+  font-family:var(--serif);font-size:0.82rem;font-style:italic;
+  padding:0.2rem 0.6rem;background:white;border:1px solid var(--parch);
+  border-radius:2px;cursor:pointer;transition:all 0.15s;color:var(--ink2);
+}
+.chip:hover{background:var(--bordeaux);color:white;border-color:var(--bordeaux)}
+
+/* ── COMPRÉHENSION ── */
+.reading-text{
+  background:white;border:1px solid var(--parch);
+  border-top:3px solid var(--gold);padding:2rem;
+  margin-bottom:2rem;border-radius:2px;
+  font-size:0.9rem;line-height:1.9;color:var(--ink2);
+}
+.reading-source{
+  font-family:var(--mono);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:1rem;padding-bottom:0.8rem;border-bottom:1px solid var(--parch);
+}
+.reading-text p{margin-bottom:1rem}
+.reading-text p:last-child{margin-bottom:0}
+
+/* ── PLAN / PROGRAMME ── */
+.timeline{position:relative;padding-left:2.5rem}
+.timeline::before{
+  content:'';position:absolute;left:0.4rem;top:0;bottom:0;
+  width:1px;background:var(--parch);
+}
+.timeline-item{
+  position:relative;margin-bottom:2rem;
+}
+.timeline-dot{
+  position:absolute;left:-2.1rem;top:0.3rem;
+  width:12px;height:12px;border-radius:50%;
+  background:var(--bordeaux);border:2px solid var(--cream);
+  box-shadow:0 0 0 2px var(--bordeaux);
+}
+.timeline-week{
+  font-family:var(--mono);font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:0.3rem;
+}
+.timeline-title{font-family:var(--serif);font-size:1.1rem;font-weight:700;margin-bottom:0.4rem}
+.timeline-body{font-size:0.85rem;color:var(--muted);line-height:1.6}
+.timeline-tasks{
+  list-style:none;margin-top:0.6rem;
+}
+.timeline-tasks li{
+  font-size:0.83rem;color:var(--ink2);
+  padding:0.2rem 0;padding-left:1.2rem;position:relative;
+}
+.timeline-tasks li::before{content:'›';position:absolute;left:0;color:var(--bordeaux);font-weight:700}
+
+/* ── NIVEAU TRACKER ── */
+.level-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+.level-card{
+  background:var(--card);border:1px solid var(--parch);border-radius:2px;
+  padding:1.3rem;transition:all 0.25s;
+}
+.level-card:hover{border-color:var(--bordeaux)}
+.level-name{font-family:var(--serif);font-size:0.95rem;font-weight:700;margin-bottom:0.8rem}
+.stars-row{display:flex;gap:0.25rem;margin-bottom:0.4rem}
+.star-btn{font-size:1.1rem;cursor:pointer;transition:transform 0.15s;background:none;border:none;padding:0}
+.star-btn:hover{transform:scale(1.3)}
+.level-note{font-family:var(--mono);font-size:0.62rem;color:var(--muted);letter-spacing:0.05em}
+
+/* ── RESSOURCES ── */
+.resources-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem}
+.resource-item{
+  display:flex;gap:1rem;align-items:flex-start;
+  background:var(--card);border:1px solid var(--parch);
+  padding:1.2rem;border-radius:2px;transition:all 0.2s;
+}
+.resource-item:hover{border-color:var(--bordeaux);transform:translateX(4px)}
+.resource-icon{font-size:1.5rem;flex-shrink:0;margin-top:0.2rem}
+.resource-title{font-family:var(--serif);font-size:1rem;font-weight:700;margin-bottom:0.3rem}
+.resource-desc{font-size:0.8rem;color:var(--muted);line-height:1.5}
+
+/* ── FOOTER ── */
+footer{
+  padding:3rem 2rem;text-align:center;
+  border-top:1px solid var(--parch);
+  background:var(--cream2);
+}
+.footer-ornament{font-family:var(--serif);font-size:1.5rem;color:var(--gold);margin-bottom:0.5rem}
+footer p{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.12em;color:var(--muted);text-transform:uppercase}
+footer span{color:var(--bordeaux)}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s,transform 0.7s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── RESULT SCREEN ── */
+.result-screen{
+  text-align:center;padding:3rem 2rem;
+  display:none;
+}
+.result-screen.show{display:block}
+.result-score-big{
+  font-family:var(--serif);font-size:5rem;font-weight:700;color:var(--bordeaux);
+  line-height:1;margin-bottom:0.5rem;
+}
+.result-msg{font-family:var(--serif);font-size:1.4rem;font-style:italic;color:var(--muted);margin-bottom:2rem}
+
+/* ── TECFÉE SECTION ── */
+:root {
+  --maple:#c0392b;
+  --maple2:#e74c3c;
+  --maple-pale:#fdf2f0;
+  --maple-mid:rgba(192,57,43,0.12);
+}
+.badge-tecfee{background:rgba(192,57,43,0.1);color:var(--maple);border:1px solid rgba(192,57,43,0.3)}
+.tecfee-intro{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem;}
+.tecfee-box{background:var(--card);border:1px solid var(--parch);border-top:3px solid var(--maple);border-radius:2px;padding:1.8rem;}
+.tecfee-box-title{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--maple);margin-bottom:1rem;}
+.tecfee-box ul{list-style:none}
+.tecfee-box li{font-size:0.85rem;color:var(--ink2);padding:0.3rem 0;padding-left:1.2rem;position:relative;}
+.tecfee-box li::before{content:'›';position:absolute;left:0;color:var(--maple);font-weight:700}
+.dictee-container{max-width:700px}
+.dictee-text{background:white;border:1px solid var(--parch);border-left:4px solid var(--gold);padding:1.5rem;margin-bottom:1.2rem;border-radius:2px;font-family:var(--serif);font-size:1.05rem;line-height:1.9;color:var(--ink);display:none;}
+.dictee-text.visible{display:block}
+.dictee-input{width:100%;min-height:120px;background:white;border:1px solid var(--parch);border-radius:2px;padding:1rem;font-family:var(--body);font-size:0.9rem;line-height:1.8;color:var(--ink);resize:vertical;outline:none;transition:border-color 0.2s;}
+.dictee-input:focus{border-color:var(--maple)}
+.dictee-result{margin-top:1rem;padding:1.2rem;border-radius:2px;font-size:0.88rem;line-height:1.7;display:none;}
+.dictee-result.show{display:block}
+.dictee-result .err{color:var(--maple);font-weight:700;text-decoration:underline wavy var(--maple)}
+.dictee-result .ok{color:var(--sage)}
+.dictee-score{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--maple);margin-bottom:0.3rem;}
+.pedago-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+.pedago-card{background:var(--card);border:1px solid var(--parch);border-left:3px solid var(--maple);border-radius:2px;padding:1.4rem;transition:all 0.25s;}
+.pedago-card:hover{border-color:var(--maple);transform:translateY(-3px);box-shadow:0 8px 20px rgba(192,57,43,0.1)}
+.pedago-word{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--maple);margin-bottom:0.2rem}
+.pedago-ctx{font-family:var(--mono);font-size:0.6rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem}
+.pedago-def{font-size:0.83rem;color:var(--ink2);line-height:1.55;margin-bottom:0.5rem}
+.pedago-ex{font-size:0.8rem;font-style:italic;color:var(--muted);border-top:1px solid var(--parch);padding-top:0.5rem}
+.exam-timer{display:flex;align-items:center;gap:1rem;background:var(--maple-pale);border:1px solid rgba(192,57,43,0.2);border-radius:2px;padding:1rem 1.5rem;margin-bottom:2rem;}
+.timer-display{font-family:var(--mono);font-size:2rem;font-weight:500;color:var(--maple);letter-spacing:0.1em;}
+.timer-label{font-family:var(--mono);font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em}
+.exam-section{background:var(--card);border:1px solid var(--parch);border-top:2px solid var(--maple);border-radius:2px;padding:1.8rem;margin-bottom:1.5rem;}
+.exam-section-title{font-family:var(--serif);font-size:1.15rem;font-weight:700;color:var(--maple);margin-bottom:0.3rem;}
+.exam-section-meta{font-family:var(--mono);font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;margin-bottom:1.2rem;}
+.exam-q{background:rgba(255,255,255,0.5);border:1px solid var(--parch);border-radius:2px;padding:1.2rem;margin-bottom:1rem;}
+.exam-q-text{font-size:0.9rem;margin-bottom:0.8rem;line-height:1.6}
+.exam-opts{display:flex;flex-direction:column;gap:0.5rem}
+.exam-opt{display:flex;align-items:center;gap:0.8rem;padding:0.6rem 1rem;background:white;border:1px solid var(--parch);border-radius:2px;cursor:pointer;transition:all 0.2s;font-size:0.85rem;}
+.exam-opt:hover:not(.disabled){border-color:var(--maple);background:var(--maple-pale)}
+.exam-opt.correct{background:rgba(74,103,65,0.1);border-color:var(--sage);color:var(--sage)}
+.exam-opt.wrong{background:rgba(192,57,43,0.08);border-color:var(--maple);color:var(--maple)}
+.exam-opt.disabled{cursor:default}
+.exam-letter{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:0.6rem;background:var(--cream2);border:1px solid var(--parch);flex-shrink:0;}
+.exam-opt.correct .exam-letter{background:var(--sage);color:white;border-color:var(--sage)}
+.exam-opt.wrong .exam-letter{background:var(--maple);color:white;border-color:var(--maple)}
+.exam-feedback{margin-top:0.6rem;padding:0.6rem 0.9rem;border-radius:2px;font-size:0.82rem;display:none;}
+.exam-feedback.show{display:block}
+.exam-feedback.good{background:rgba(74,103,65,0.08);border-left:3px solid var(--sage);color:var(--sage)}
+.exam-feedback.bad{background:rgba(192,57,43,0.08);border-left:3px solid var(--maple);color:var(--maple)}
+.exam-result{text-align:center;padding:3rem;background:var(--maple-pale);border:1px solid rgba(192,57,43,0.2);border-radius:2px;display:none;}
+.exam-result.show{display:block}
+.exam-result-score{font-family:var(--serif);font-size:4rem;font-weight:700;color:var(--maple);line-height:1}
+.exam-result-label{font-family:var(--mono);font-size:0.7rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;margin-top:0.5rem}
+.exam-result-msg{font-family:var(--serif);font-size:1.2rem;font-style:italic;color:var(--ink2);margin-top:1rem}
+.seuil-bar{display:flex;align-items:center;gap:1.5rem;margin-top:1.5rem;justify-content:center;flex-wrap:wrap;}
+.seuil-item{text-align:center}
+.seuil-val{font-family:var(--mono);font-size:1.2rem;font-weight:500}
+.seuil-lbl{font-family:var(--mono);font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em}
+.seuil-pass{color:var(--sage)}.seuil-fail{color:var(--maple)}
+.syntax-card{background:var(--card);border:1px solid var(--parch);border-radius:2px;padding:1.8rem;margin-bottom:1.2rem;}
+.syntax-instruction{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--maple);margin-bottom:0.8rem;}
+@media(max-width:768px){.tecfee-intro{grid-template-columns:1fr}}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:2rem;right:2rem;
+  background:var(--ink);color:var(--cream);
+  padding:0.8rem 1.4rem;border-radius:2px;
+  font-family:var(--mono);font-size:0.72rem;
+  z-index:999;opacity:0;transform:translateY(8px);
+  transition:all 0.3s;pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .score-inner{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  section{padding:4rem 1.2rem}
+  .score-banner{padding:1.5rem}
+  .score-inner{grid-template-columns:repeat(2,1fr)}
+  .hero{padding-top:6rem}
+}
+@media(max-width:480px){
+  .score-inner{grid-template-columns:repeat(1,1fr)}
+  .btn{padding:0.75rem 1.4rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-brand">Atelier <span>Français</span></div>
+  <ul class="nav-links">
+    <li><a href="#programme">Programme</a></li>
+    <li><a href="#quiz">Quiz TCF</a></li>
+    <li><a href="#grammaire">Grammaire</a></li>
+    <li><a href="#vocabulaire">Vocabulaire</a></li>
+    <li><a href="#expression">Expression</a></li>
+    <li><a href="#comprehension">Compréhension</a></li>
+    <li><a href="#tecfee">TECFÉE</a></li>
+    <li><a href="#suivi">Mon Suivi</a></li>
+  </ul>
+  <div class="nav-score" id="nav-score">Score global : 0%</div>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div>
+    <div class="hero-ornament">✦ &nbsp; Préparation Certifiée &nbsp; ✦</div>
+    <h1 class="hero-title">Maîtriser le<br/><em>Français</em></h1>
+    <p class="hero-subtitle">Un atelier complet pour préparer le TCF, le TEF-Canada et le TECFÉE — orthographe, grammaire, expression, vocabulaire pédagogique.</p>
+    <div class="hero-badges">
+      <span class="badge badge-tcf">✦ TCF — Test de Connaissance</span>
+      <span class="badge badge-tef">✦ TEF-Canada — Immigration</span>
+      <span class="badge badge-b2">✦ Niveau B2 → C1</span>
+      <span class="badge badge-tecfee">✦ TECFÉE — Enseignement Québec</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#quiz" class="btn btn-primary">Commencer les exercices</a>
+      <a href="#programme" class="btn btn-outline">Voir le programme</a>
+      <a href="#tecfee" class="btn btn-outline" style="border-color:rgba(192,57,43,0.4);color:var(--maple)">Section TECFÉE →</a>
+    </div>
+  </div>
+</header>
+
+<!-- ── SCORE BANNER ── -->
+<div class="score-banner">
+  <div class="score-inner" id="score-inner">
+    <div class="score-item">
+      <div class="score-label">Compréhension</div>
+      <div class="score-val" id="sc-comp">0<span class="score-total">/5</span></div>
+      <div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" id="bar-comp" data-max="5"></div></div></div>
+    </div>
+    <div class="score-item">
+      <div class="score-label">Grammaire</div>
+      <div class="score-val" id="sc-gram">0<span class="score-total">/5</span></div>
+      <div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" id="bar-gram" data-max="5"></div></div></div>
+    </div>
+    <div class="score-item">
+      <div class="score-label">Vocabulaire</div>
+      <div class="score-val" id="sc-voc">0<span class="score-total">/5</span></div>
+      <div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" id="bar-voc" data-max="5"></div></div></div>
+    </div>
+    <div class="score-item">
+      <div class="score-label">Maîtrise notions</div>
+      <div class="score-val" id="sc-level">0<span class="score-total">%</span></div>
+      <div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" id="bar-level" data-max="100"></div></div></div>
+    </div>
+    <div class="score-item">
+      <div class="score-label">Checklist</div>
+      <div class="score-val" id="sc-check">0<span class="score-total">%</span></div>
+      <div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" id="bar-check" data-max="100"></div></div></div>
+    </div>
+    <div class="score-item">
+      <div class="score-label">TECFÉE</div>
+      <div class="score-val" id="sc-tecfee">0<span class="score-total">/20</span></div>
+      <div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" id="bar-tecfee" data-max="15" style="background:linear-gradient(90deg,var(--maple),var(--gold))"></div></div></div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ── PROGRAMME ── -->
+<section id="programme">
+  <div class="section-label reveal">Plan de préparation</div>
+  <h2 class="section-title reveal">Programme <em>12 semaines</em><br/>TCF &amp; TEF</h2>
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-week">Semaines 1 – 2</div>
+      <div class="timeline-title">Fondations — Grammaire essentielle</div>
+      <div class="timeline-body">Consolider les bases grammaticales indispensables pour tous les exercices du TCF.</div>
+      <ul class="timeline-tasks">
+        <li>Temps verbaux : présent, passé composé, imparfait, futur</li>
+        <li>Subjonctif présent et ses déclencheurs</li>
+        <li>Accord des participes passés</li>
+        <li>Pronoms relatifs (qui, que, dont, où, lequel…)</li>
+        <li>Connecteurs logiques de base</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-week">Semaines 3 – 4</div>
+      <div class="timeline-title">Vocabulaire thématique niveau B2</div>
+      <div class="timeline-body">Acquérir le lexique des thèmes récurrents dans les épreuves TCF et TEF.</div>
+      <ul class="timeline-tasks">
+        <li>Environnement, écologie, développement durable</li>
+        <li>Société, immigration, multiculturalisme</li>
+        <li>Économie, travail, formation professionnelle</li>
+        <li>Santé, sciences, technologie</li>
+        <li>Nuances et registres de langue</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-week">Semaines 5 – 6</div>
+      <div class="timeline-title">Compréhension écrite &amp; orale</div>
+      <div class="timeline-body">Développer les stratégies de lecture rapide et d'écoute active.</div>
+      <ul class="timeline-tasks">
+        <li>Identifier l'idée principale d'un texte</li>
+        <li>Inférence et sens implicite</li>
+        <li>Textes journalistiques, scientifiques, littéraires</li>
+        <li>Documents audio : bulletins, débats, interviews</li>
+        <li>Prise de notes efficace</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-week">Semaines 7 – 8</div>
+      <div class="timeline-title">Expression écrite — Niveau C1</div>
+      <div class="timeline-body">Maîtriser les types de textes demandés dans l'épreuve d'expression.</div>
+      <ul class="timeline-tasks">
+        <li>Lettre formelle et courriel professionnel</li>
+        <li>Texte argumentatif — thèse, antithèse, synthèse</li>
+        <li>Compte rendu et résumé de document</li>
+        <li>Richesse lexicale et variété syntaxique</li>
+        <li>Cohérence et cohésion du discours</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-week">Semaines 9 – 10</div>
+      <div class="timeline-title">Expression orale — Interaction</div>
+      <div class="timeline-body">Développer la fluidité, la précision et la capacité à argumenter à l'oral.</div>
+      <ul class="timeline-tasks">
+        <li>Présentation de soi et parcours</li>
+        <li>Débat et prise de position</li>
+        <li>Phonétique et intonation</li>
+        <li>Expressions idiomatiques courantes</li>
+        <li>Simulation d'entretien TEF-Canada</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-week">Semaines 11 – 12</div>
+      <div class="timeline-title">Entraînement intensif sur épreuves</div>
+      <div class="timeline-body">Simulations complètes dans les conditions réelles de l'examen.</div>
+      <ul class="timeline-tasks">
+        <li>2 examens blancs TCF complets chronométrés</li>
+        <li>2 simulations TEF-Canada complètes</li>
+        <li>Correction détaillée et analyse des erreurs</li>
+        <li>Révision ciblée des points faibles identifiés</li>
+        <li>Stratégies de gestion du stress et du temps</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── QUIZ TCF ── -->
+<section id="quiz" style="background:rgba(255,255,255,0.3);max-width:100%;padding:6rem 2rem;">
+<div style="max-width:1100px;margin:0 auto;">
+  <div class="section-label reveal">Exercices interactifs</div>
+  <h2 class="section-title reveal">Quiz <em>TCF / TEF</em></h2>
+
+  <div class="tabs reveal">
+    <button class="tab active" onclick="switchQuiz('comp')">Compréhension</button>
+    <button class="tab" onclick="switchQuiz('gram')">Grammaire</button>
+    <button class="tab" onclick="switchQuiz('voc')">Vocabulaire</button>
+  </div>
+
+  <div class="quiz-container">
+    <div class="quiz-header">
+      <div class="quiz-progress" id="quiz-progress">Question 1 / 5</div>
+      <div class="quiz-score-live" id="quiz-score-live">Score : 0</div>
+    </div>
+    <div id="quiz-area"></div>
+    <div class="result-screen" id="result-screen">
+      <div class="result-score-big" id="result-score-big">0/5</div>
+      <div class="result-msg" id="result-msg"></div>
+      <button class="btn btn-primary" id="retry-btn">Recommencer</button>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ── GRAMMAIRE ── -->
+<section id="grammaire">
+  <div class="section-label reveal">Fiches de cours</div>
+  <h2 class="section-title reveal">Points de <em>Grammaire</em><br/>Essentiels</h2>
+
+  <div class="tabs reveal">
+    <button class="tab active" onclick="switchGram('temps')">Temps &amp; Modes</button>
+    <button class="tab" onclick="switchGram('accord')">Accords</button>
+    <button class="tab" onclick="switchGram('pronoms')">Pronoms</button>
+    <button class="tab" onclick="switchGram('subj')">Subjonctif</button>
+  </div>
+
+  <div id="gram-content"></div>
+</section>
+
+<!-- ── VOCABULAIRE ── -->
+<section id="vocabulaire" style="background:rgba(255,255,255,0.3);max-width:100%;padding:6rem 2rem;">
+<div style="max-width:1100px;margin:0 auto;">
+  <div class="section-label reveal">Lexique thématique</div>
+  <h2 class="section-title reveal">Vocabulaire <em>Essentiel</em></h2>
+  <p style="font-size:0.85rem;color:var(--muted);margin-bottom:2rem;font-style:italic;" class="reveal">Clique sur une carte pour voir la définition et un exemple.</p>
+
+  <div class="tabs reveal">
+    <button class="tab active" onclick="switchVocab('soc')">Société</button>
+    <button class="tab" onclick="switchVocab('env')">Environnement</button>
+    <button class="tab" onclick="switchVocab('eco')">Économie</button>
+    <button class="tab" onclick="switchVocab('cult')">Culture &amp; Arts</button>
+  </div>
+
+  <div class="vocab-grid" id="vocab-grid"></div>
+</div>
+</section>
+
+<!-- ── EXPRESSION ÉCRITE ── -->
+<section id="expression">
+  <div class="section-label reveal">Production écrite</div>
+  <h2 class="section-title reveal">Atelier <em>Expression</em><br/>Écrite</h2>
+  <div class="writing-section reveal">
+    <div class="tabs">
+      <button class="tab active" onclick="switchPrompt(0)">Lettre formelle</button>
+      <button class="tab" onclick="switchPrompt(1)">Texte argumentatif</button>
+      <button class="tab" onclick="switchPrompt(2)">Résumé</button>
+    </div>
+    <div class="writing-prompt" id="writing-prompt"></div>
+    <textarea class="writing-area" id="writing-area" placeholder="Rédigez votre réponse ici…"></textarea>
+    <div class="writing-meta">
+      <div class="word-count" id="word-count">0 mot(s) — Objectif : 200–250 mots</div>
+      <button class="btn btn-outline" onclick="saveWriting()" style="padding:0.5rem 1rem;font-size:0.65rem">Sauvegarder ✓</button>
+    </div>
+    <div class="connectors-box">
+      <div class="conn-title">Connecteurs logiques utiles (cliquer pour insérer)</div>
+      <div id="connectors-area"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMPRÉHENSION ÉCRITE ── -->
+<section id="comprehension" style="background:rgba(255,255,255,0.3);max-width:100%;padding:6rem 2rem;">
+<div style="max-width:1100px;margin:0 auto;">
+  <div class="section-label reveal">Lecture &amp; analyse</div>
+  <h2 class="section-title reveal">Compréhension <em>Écrite</em></h2>
+  <div class="tabs reveal">
+    <button class="tab active" onclick="switchReading(0)">Texte journalistique</button>
+    <button class="tab" onclick="switchReading(1)">Texte scientifique</button>
+  </div>
+  <div id="reading-area"></div>
+</div>
+</section>
+
+
+<!-- ── TECFÉE ── -->
+<section id="tecfee" style="background:rgba(192,57,43,0.03);max-width:100%;padding:6rem 2rem;">
+<div style="max-width:1100px;margin:0 auto;">
+  <div class="section-label reveal" style="color:var(--maple)">TECFÉE — Enseignement au Québec</div>
+  <h2 class="section-title reveal">Préparer le <em style="color:var(--maple)">TECFÉE</em></h2>
+
+  <!-- Présentation -->
+  <div class="tecfee-intro reveal">
+    <div class="tecfee-box">
+      <div class="tecfee-box-title">Qu'est-ce que le TECFÉE ?</div>
+      <ul>
+        <li>Test obligatoire pour obtenir le brevet d'enseignement au Québec</li>
+        <li>Évalue la maîtrise du <strong>français écrit</strong> des futurs enseignants</li>
+        <li>Seuil de réussite : <strong>75 % sur 55 questions</strong> (≈ 41/55)</li>
+        <li>Durée : <strong>3 heures</strong> — sans dictionnaire ni correcteur</li>
+        <li>Organisé par le Ministère de l'Éducation du Québec (MEQ)</li>
+        <li>Peut être repris si échec (max 3 tentatives par année)</li>
+      </ul>
+    </div>
+    <div class="tecfee-box">
+      <div class="tecfee-box-title">Structure de l'examen</div>
+      <ul>
+        <li><strong>Partie A — Orthographe grammaticale</strong> (25 questions) · ≈ 45 %</li>
+        <li><strong>Partie B — Orthographe lexicale</strong> (10 questions) · ≈ 18 %</li>
+        <li><strong>Partie C — Syntaxe &amp; Ponctuation</strong> (10 questions) · ≈ 18 %</li>
+        <li><strong>Partie D — Vocabulaire</strong> (10 questions) · ≈ 18 %</li>
+        <li>Format QCM à 4 choix, une seule bonne réponse</li>
+        <li>Textes pédagogiques et institutionnels québécois</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs reveal">
+    <button class="tab active" onclick="switchTecfee('ortho-gram')">Orthographe grammaticale</button>
+    <button class="tab" onclick="switchTecfee('ortho-lex')">Orthographe lexicale</button>
+    <button class="tab" onclick="switchTecfee('syntaxe')">Syntaxe &amp; Ponctuation</button>
+    <button class="tab" onclick="switchTecfee('pedago')">Vocabulaire pédagogique</button>
+    <button class="tab" onclick="switchTecfee('examen')">Examen blanc</button>
+  </div>
+
+  <div id="tecfee-content"></div>
+</div>
+</section>
+
+<!-- ── SUIVI DE NIVEAU ── -->
+<section id="suivi">
+  <div class="section-label reveal">Auto-évaluation</div>
+  <h2 class="section-title reveal">Mon Suivi de <em>Progression</em></h2>
+  <p style="font-size:0.85rem;color:var(--muted);margin-bottom:2rem;font-style:italic;" class="reveal">Évalue ta maîtrise de 1 à 5 étoiles. Ton progrès est sauvegardé.</p>
+  <div class="level-grid" id="level-grid"></div>
+</section>
+
+<!-- ── RESSOURCES ── -->
+<section id="ressources" style="background:rgba(255,255,255,0.3);max-width:100%;padding:6rem 2rem;">
+<div style="max-width:1100px;margin:0 auto;">
+  <div class="section-label reveal">Outils recommandés</div>
+  <h2 class="section-title reveal">Ressources &amp; <em>Matériaux</em></h2>
+  <div class="resources-grid reveal">
+    <div class="resource-item"><div class="resource-icon">📻</div><div><div class="resource-title">RFI Savoirs</div><div class="resource-desc">Exercices audio officiels pour le TCF. Transcriptions disponibles. Niveau A2 à C1.</div></div></div>
+    <div class="resource-item"><div class="resource-icon">🎙️</div><div><div class="resource-title">France Culture Podcasts</div><div class="resource-desc">Émissions culturelles et scientifiques. Idéal pour enrichir le vocabulaire avancé.</div></div></div>
+    <div class="resource-item"><div class="resource-icon">📰</div><div><div class="resource-title">Le Monde & Le Figaro</div><div class="resource-desc">Lire 1 article par jour. Vocabulaire journalistique, constructions syntaxiques complexes.</div></div></div>
+    <div class="resource-item"><div class="resource-icon">📚</div><div><div class="resource-title">Grammaire Progressive du Français</div><div class="resource-desc">CLE International — Niveau avancé. La référence pour la grammaire TCF/TEF.</div></div></div>
+    <div class="resource-item"><div class="resource-icon">🎬</div><div><div class="resource-title">TV5MONDE Exercices</div><div class="resource-desc">Vidéos avec exercices intégrés. Compréhension orale dans des contextes authentiques.</div></div></div>
+    <div class="resource-item"><div class="resource-icon">🃏</div><div><div class="resource-title">Anki — Flashcards</div><div class="resource-desc">Mémoriser le vocabulaire thématique par répétition espacée. Decks TCF disponibles.</div></div></div>
+    <div class="resource-item"><div class="resource-icon">🏫</div><div><div class="resource-title">Orthodidacte</div><div class="resource-desc">Orthographe et dictées en ligne. Centaines d'exercices corrigés, tous niveaux.</div></div></div>
+    <div class="resource-item"><div class="resource-icon">✍️</div><div><div class="resource-title">LanguageTool</div><div class="resource-desc">Correcteur grammatical avancé pour vérifier vos productions écrites en temps réel.</div></div></div>
+    <div class="resource-item"><div class="resource-icon">🌐</div><div><div class="resource-title">Conjuguemos / Frantastique</div><div class="resource-desc">Conjugaison interactive et cours quotidiens ludiques adaptés au niveau B2/C1.</div></div></div>
+  </div>
+</div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-ornament">✦</div>
+  <p>Atelier Français — Préparation <span>TCF · TEF-Canada · TECFÉE</span> · 2024–2025</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════════════════════
+
+const QUIZ_DATA = {
+  comp: [
+    { type:"Compréhension écrite", q:"Dans la phrase « Bien que la situation soit difficile, il persévère », le mot souligné exprime :", opts:["La cause","La concession","La conséquence","Le but"], ans:1, exp:"'Bien que' introduit une proposition de concession — on reconnaît un fait contraire à ce qu'on attendrait." },
+    { type:"Compréhension écrite", q:"Quel est le sens du mot <em>épineux</em> dans « Ce dossier est particulièrement épineux » ?", opts:["Complexe et délicat","Urgent et pressant","Simple et direct","Long et fastidieux"], ans:0, exp:"Épineux = qui présente des difficultés, des complications. Synonymes : délicat, problématique, complexe." },
+    { type:"Compréhension écrite", q:"Que signifie l'expression « mettre les points sur les i » ?", opts:["Corriger des fautes","Être très précis et clair","Hésiter longuement","Écrire avec soin"], ans:1, exp:"Cette expression idiomatique signifie apporter des précisions, ne laisser aucune ambiguïté, être très explicite." },
+    { type:"Compréhension écrite", q:"Quel registre de langue est employé dans « Je n'ai guère apprécié cette démarche » ?", opts:["Familier","Standard","Soutenu","Argotique"], ans:2, exp:"'Guère' est un adverbe de sens négatif caractéristique du registre soutenu/littéraire. En standard on dirait 'pas vraiment'." },
+    { type:"Compréhension écrite", q:"Choisissez la reformulation correcte de : « Il nie avoir participé à l'événement. »", opts:["Il dit qu'il a participé","Il affirme ne pas avoir participé","Il admet sa participation","Il ignore l'événement"], ans:1, exp:"'Nier' + infinitif passé = affirmer que l'on n'a PAS fait l'action. La reformulation correcte emploie une tournure négative explicite." }
+  ],
+  gram: [
+    { type:"Structure grammaticale", q:"Complétez : « Il faut que tu ___ à l'heure. »", opts:["arrives","arriveras","arrivais","arrive"], ans:3, exp:"Après 'il faut que', on emploie le subjonctif présent. 'Arrive' est la forme correcte du subjonctif de 'arriver' pour 'tu'." },
+    { type:"Structure grammaticale", q:"Choisissez la forme correcte : « Les décisions ___ prises hier étaient judicieuses. »", opts:["qui ont été","qu'ont été","dont ont été","qu'ont"], ans:0, exp:"La relative est sujet du verbe passif 'prises' — on emploie 'qui' (pronom relatif sujet), suivi du passé composé passif 'ont été'." },
+    { type:"Structure grammaticale", q:"Quel temps convient : « Si j'avais su, je ne ___ pas venu. »", opts:["serais","suis","étais","serai"], ans:0, exp:"Si + plus-que-parfait → conditionnel passé. C'est la structure de la condition dans le passé (hypothèse irréelle)." },
+    { type:"Structure grammaticale", q:"La phrase « Elle s'est lavé les mains » est :", opts:["Incorrecte, lavé doit s'accorder","Correcte — le COD est après le verbe","Incorrecte, il faut 'lavée'","Correcte car c'est un verbe réfléchi direct"], ans:1, exp:"Avec un verbe pronominal + COD placé APRÈS (les mains), le participe passé ne s'accorde pas avec le sujet. 'Lavé' reste invariable." },
+    { type:"Structure grammaticale", q:"Choisissez la préposition correcte : « Il tient ___ réussir cet examen. »", opts:["à","de","pour","par"], ans:0, exp:"'Tenir à' + infinitif exprime le désir fortement ancré. C'est une locution verbale figée : tenir à faire quelque chose." }
+  ],
+  voc: [
+    { type:"Vocabulaire avancé", q:"Quel mot complète : « Malgré des efforts ___, les résultats restent décevants. »", opts:["assidus","assidûs","assiduent","assidument"], ans:0, exp:"'Assidu(e)s' est l'adjectif pluriel signifiant régulier, persévérant, appliqué. Ne pas confondre avec l'adverbe 'assidûment'." },
+    { type:"Vocabulaire avancé", q:"Le synonyme précis de « péremptoire » est :", opts:["Hésitant","Catégorique et sans appel","Modéré","Provisoire"], ans:1, exp:"Péremptoire qualifie un ton, un argument qui ne laisse pas place à la discussion. Synonymes : tranchant, décisif, absolu." },
+    { type:"Vocabulaire avancé", q:"« Cette mesure s'avère ___ au regard des enjeux actuels. » Quel adjectif convient le mieux ?", opts:["dérisoire","aléatoire","péjorative","circonstancielle"], ans:0, exp:"Dérisoire = insignifiant, sans commune mesure avec l'importance d'une situation. Convient pour critiquer l'insuffisance d'une mesure." },
+    { type:"Vocabulaire avancé", q:"Qu'est-ce qu'un « contresens » dans un texte ?", opts:["Une erreur typographique","Une interprétation contraire au sens réel","Une répétition inutile","Un connecteur logique mal employé"], ans:1, exp:"Un contresens est une erreur d'interprétation qui donne au texte un sens opposé ou radicalement différent de celui voulu." },
+    { type:"Vocabulaire avancé", q:"Laquelle de ces expressions signifie « sans aucun doute » ?", opts:["À dessein","Sans conteste","Au demeurant","En revanche"], ans:1, exp:"'Sans conteste' = indiscutablement, de façon évidente. Les autres : à dessein (intentionnellement), au demeurant (par ailleurs), en revanche (inversement)." }
+  ]
+};
+
+const GRAMMAR_DATA = {
+  temps: [
+    { title:"Passé composé vs Imparfait", body:"Le passé composé exprime une action achevée, ponctuelle ou délimitée dans le temps. L'imparfait décrit une action en cours, une habitude passée ou une description.", ex:"<strong>Elle lisait</strong> (action en cours) quand le téléphone <strong>a sonné</strong> (action soudaine).", tip:"Astuce : imparfait = cadre / décor ; passé composé = événement / action principale." },
+    { title:"Le Plus-que-parfait", body:"Exprime une action antérieure à une autre action passée. Formé avec l'auxiliaire à l'imparfait + participe passé.", ex:"Il <strong>avait terminé</strong> son rapport avant que la réunion ne commence.", tip:"Chronologie : plus-que-parfait → passé composé ou imparfait (dans l'ordre temporel réel)." },
+    { title:"Le Conditionnel présent et passé", body:"Conditionnel présent : hypothèse présente/future (si + imparfait → conditionnel présent). Conditionnel passé : hypothèse dans le passé (si + plus-que-parfait → conditionnel passé).", ex:"Si j'<strong>avais</strong> le temps, je <strong>viendrais</strong>. / Si j'<strong>avais eu</strong> le temps, je <strong>serais venu</strong>.", tip:"Jamais de conditionnel dans la proposition en 'si' qui exprime la condition !" },
+    { title:"Le Futur antérieur", body:"Exprime une action future qui sera accomplie avant une autre action future. Utilisé pour exprimer une supposition sur le passé.", ex:"Quand tu <strong>auras fini</strong>, tu pourras partir. / Il <strong>aura oublié</strong> cette histoire.", tip:"Repère : 'quand', 'lorsque', 'dès que' + futur antérieur → futur simple dans la principale." }
+  ],
+  accord: [
+    { title:"Accord du participe passé avec 'avoir'", body:"Le participe passé s'accorde avec le COD si celui-ci est placé AVANT le verbe. Pas d'accord si le COD est après, ou s'il n'y a pas de COD.", ex:"Les livres que j'<strong>ai lus</strong>. (COD 'que' = les livres, avant) / J'<strong>ai lu</strong> des livres. (COD après)", tip:"Question pour trouver le COD : J'ai lu QUOI ? → Si la réponse est avant le verbe, accordez !" },
+    { title:"Accord avec 'être' (verbes pronominaux)", body:"Les verbes pronominaux accordent généralement le participe avec le sujet, SAUF si le verbe a un COD après lui.", ex:"Elle s'est <strong>levée</strong>. (Pas de COD) / Elle s'est <strong>lavé</strong> les mains. (COD = les mains, après)", tip:"Vérifiez toujours la présence d'un COD après le verbe pronominal avant d'accorder." },
+    { title:"Accord de l'adjectif qualificatif", body:"L'adjectif s'accorde en genre et en nombre avec le nom qu'il qualifie. Attention aux adjectifs de couleur composés ou issus de noms.", ex:"Des robes <strong>bleu marine</strong>. (invariable — couleur composée) / Des voitures <strong>bleues</strong>. (simple)", tip:"Adjectifs de couleur invariables : marron, crème, fauve, bordeaux, ainsi que les couleurs composées." }
+  ],
+  pronoms: [
+    { title:"Pronoms relatifs simples", body:"QUI : sujet du verbe relatif. QUE : COD. DONT : complément avec 'de'. OÙ : complément de lieu ou de temps.", ex:"L'auteur <strong>qui</strong> a écrit ce livre. / Le livre <strong>que</strong> je lis. / Le sujet <strong>dont</strong> il parle. / L'endroit <strong>où</strong> je vis.", tip:"Dont remplace toujours 'de + quelque chose'. Astuce : chercher le verbe/adjectif qui se construit avec 'de'." },
+    { title:"Pronoms relatifs composés", body:"Lequel, laquelle, lesquels, lesquelles — après une préposition (à, de, dans, pour, par, avec...). Attention aux contractions : auquel, duquel…", ex:"Le projet <strong>auquel</strong> je travaille. / La raison <strong>pour laquelle</strong> il est parti.", tip:"Après 'parmi, entre' → toujours lesquels/lesquelles, jamais 'qui' pour des personnes." },
+    { title:"Pronoms personnels COD et COI", body:"COD : me, te, le/la, nous, vous, les. COI : me, te, lui, nous, vous, leur. Ordre devant le verbe : COD avant COI sauf si le COD est 'le/la/les'.", ex:"Il <strong>me</strong> le donne. / Il <strong>lui</strong> parle. / Il <strong>le lui</strong> donne.", tip:"Attention : 'leur' (COI pluriel) ne prend jamais de -s, contrairement à l'adjectif possessif 'leurs'." }
+  ],
+  subj: [
+    { title:"Déclencheurs du subjonctif — Volonté & Émotion", body:"Après les verbes de volonté (vouloir, souhaiter, désirer, exiger) et d'émotion (être content/triste/surpris que, craindre que, regretter que…).", ex:"Je <strong>veux que</strong> tu <strong>viennes</strong>. / Elle est contente qu'il <strong>soit</strong> là.", tip:"Si le sujet est le même dans les deux propositions, on utilise l'infinitif : Je veux VENIR (pas 'que je vienne')." },
+    { title:"Déclencheurs — Doute & Possibilité", body:"Après les expressions de doute, de possibilité ou d'impossibilité : il est possible que, il se peut que, douter que, nier que…", ex:"Il est possible qu'il <strong>pleuve</strong>. / Je doute qu'elle <strong>puisse</strong> venir.", tip:"Mais : il est probable que + indicatif (quasi-certitude). Il est possible que + subjonctif (incertitude)." },
+    { title:"Conjonctions déclenchant le subjonctif", body:"Bien que, quoique (concession) ; pour que, afin que (but) ; avant que, jusqu'à ce que (temps) ; à moins que, à condition que (condition).", ex:"<strong>Bien qu'</strong>il <strong>soit</strong> fatigué, il continue. / <strong>Pour que</strong> tu <strong>réussisses</strong>, travaille.", tip:"Moyen mnémotechnique : « BAQUE » — But, Avant que, Quoique/bien que, Un peu de doute, Émotion." }
+  ]
+};
+
+const VOCAB_DATA = {
+  soc: [
+    { w:"L'intégration", cat:"Nom féminin", def:"Processus par lequel un individu ou un groupe s'incorpore à une société en en adoptant les valeurs et les normes.", ex:"L'intégration des nouveaux arrivants nécessite des politiques d'accompagnement adaptées." },
+    { w:"La précarité", cat:"Nom féminin", def:"État d'instabilité ou d'insécurité, notamment économique ou sociale. Situation fragile et incertaine.", ex:"La précarité de l'emploi touche particulièrement les jeunes diplômés." },
+    { w:"L'égalité des chances", cat:"Expression nominale", def:"Principe selon lequel chaque individu doit avoir les mêmes opportunités indépendamment de ses origines.", ex:"Réduire les inégalités scolaires est indispensable pour garantir l'égalité des chances." },
+    { w:"Le vivre-ensemble", cat:"Nom masculin", def:"Capacité de personnes d'origines différentes à coexister harmonieusement dans un même espace social.", ex:"Le vivre-ensemble repose sur le respect mutuel et le dialogue interculturel." },
+    { w:"La discrimination", cat:"Nom féminin", def:"Traitement inégal et injustifié envers une personne ou un groupe en raison de caractéristiques personnelles.", ex:"La discrimination à l'embauche demeure un problème persistant dans de nombreux secteurs." },
+    { w:"L'exclusion sociale", cat:"Expression nominale", def:"Phénomène de mise à l'écart d'individus ou de groupes de la vie économique et sociale normale.", ex:"Les politiques de lutte contre l'exclusion sociale s'appuient sur le renforcement des liens communautaires." },
+    { w:"La citoyenneté", cat:"Nom féminin", def:"Qualité de citoyen impliquant des droits et des devoirs envers la collectivité et l'État.", ex:"L'éducation à la citoyenneté est fondamentale pour former des individus responsables." },
+    { w:"Le multiculturalisme", cat:"Nom masculin", def:"Coexistence et reconnaissance de plusieurs cultures au sein d'une même société ou d'un même État.", ex:"Le Canada a adopté une politique officielle de multiculturalisme depuis 1971." },
+  ],
+  env: [
+    { w:"Le développement durable", cat:"Expression nominale", def:"Mode de développement qui répond aux besoins du présent sans compromettre la capacité des générations futures.", ex:"Les entreprises intègrent désormais le développement durable dans leur stratégie à long terme." },
+    { w:"L'empreinte carbone", cat:"Expression nominale", def:"Quantité totale de gaz à effet de serre émis par une activité humaine, mesurée en équivalents CO₂.", ex:"Réduire son empreinte carbone passe par des choix de consommation plus responsables." },
+    { w:"La biodiversité", cat:"Nom féminin", def:"Diversité des êtres vivants et de leurs interactions dans un écosystème donné.", ex:"L'érosion de la biodiversité constitue une menace silencieuse pour l'équilibre des écosystèmes." },
+    { w:"La transition énergétique", cat:"Expression nominale", def:"Passage d'un modèle énergétique basé sur les combustibles fossiles vers des énergies renouvelables.", ex:"La transition énergétique exige des investissements massifs et une volonté politique forte." },
+    { w:"Anthropique", cat:"Adjectif", def:"Qui résulte de l'activité humaine, en opposition aux phénomènes naturels.", ex:"Le changement climatique est en grande partie d'origine anthropique, selon le GIEC." },
+    { w:"L'écosystème", cat:"Nom masculin", def:"Ensemble formé par une communauté d'êtres vivants et son environnement physique et chimique.", ex:"La destruction d'un écosystème peut avoir des répercussions en cascade sur l'ensemble de la chaîne alimentaire." },
+  ],
+  eco: [
+    { w:"La mondialisation", cat:"Nom féminin", def:"Processus d'intégration croissante des économies nationales dans une économie mondiale unique.", ex:"La mondialisation a favorisé les échanges commerciaux mais accentué certaines inégalités." },
+    { w:"Le pouvoir d'achat", cat:"Expression nominale", def:"Quantité de biens et de services qu'un revenu permet d'acquérir à un moment donné.", ex:"L'inflation érode le pouvoir d'achat des ménages les plus modestes." },
+    { w:"La tertiarisation", cat:"Nom féminin", def:"Développement croissant du secteur des services dans l'économie, au détriment des secteurs primaire et secondaire.", ex:"La tertiarisation de l'économie a profondément reconfiguré le marché du travail.", },
+    { w:"L'innovation disruptive", cat:"Expression nominale", def:"Innovation qui remet en cause et transforme radicalement un marché ou un secteur existant.", ex:"L'intelligence artificielle constitue une innovation disruptive pour de nombreuses industries.", },
+    { w:"La précarisation", cat:"Nom féminin", def:"Processus par lequel des conditions de vie ou de travail deviennent de plus en plus instables et incertaines.", ex:"La multiplication des contrats courts contribue à la précarisation du monde du travail.", },
+    { w:"La dette publique", cat:"Expression nominale", def:"Ensemble des emprunts contractés par un État pour financer ses dépenses au-delà de ses recettes.", ex:"La maîtrise de la dette publique est au cœur des débats politiques contemporains.", },
+  ],
+  cult: [
+    { w:"Le patrimoine immatériel", cat:"Expression nominale", def:"Ensemble des pratiques, représentations et expressions culturelles vivantes transmises de génération en génération.", ex:"L'UNESCO reconnaît et protège de nombreux éléments du patrimoine immatériel mondial." },
+    { w:"L'effervescence culturelle", cat:"Expression nominale", def:"Période de grande vitalité et de bouillonnement dans la création artistique d'une société.", ex:"Paris des années 1920 connut une effervescence culturelle exceptionnelle." },
+    { w:"L'avant-garde", cat:"Nom féminin", def:"Mouvement artistique ou intellectuel qui défend des idées et des formes nouvelles, en avance sur son temps.", ex:"Le mouvement Dada fut une avant-garde artistique radicale née au lendemain de la Première Guerre mondiale." },
+    { w:"La francophonie", cat:"Nom féminin", def:"Ensemble des populations et des institutions qui utilisent le français comme langue d'usage ou officielle.", ex:"La francophonie représente environ 300 millions de locuteurs répartis sur les cinq continents." },
+    { w:"La démocratisation culturelle", cat:"Expression nominale", def:"Processus visant à rendre la culture accessible à l'ensemble de la population, quelles que soient ses origines.", ex:"La politique de démocratisation culturelle d'André Malraux a posé les bases des Maisons de la culture en France." },
+    { w:"L'interculturalité", cat:"Nom féminin", def:"Interaction, échange et enrichissement mutuel entre personnes de cultures différentes.", ex:"L'interculturalité est une compétence clé dans un monde professionnel de plus en plus globalisé." },
+  ]
+};
+
+const WRITING_PROMPTS = [
+  {
+    level:"TEF-Canada — Expression écrite Niveau B2",
+    text:"Vous venez de prendre connaissance d'un article affirmant que le télétravail généralisé nuit à la cohésion sociale des entreprises. Rédigez une lettre formelle au directeur d'un magazine pour exprimer votre désaccord argumenté avec cette position.",
+    constraints:["200 à 250 mots","Lettre formelle avec formule d'appel et de politesse","Minimum 2 arguments développés","Référence à des exemples concrets"]
+  },
+  {
+    level:"TCF — Production écrite Niveau C1",
+    text:"« Les réseaux sociaux constituent aujourd'hui une menace pour la démocratie. » Dans un texte argumentatif structuré, défendez votre point de vue sur cette affirmation en vous appuyant sur des arguments et des exemples précis.",
+    constraints:["230 à 280 mots","Structure : introduction, thèse, antithèse, synthèse","Utiliser des connecteurs logiques variés","Registre soutenu exigé"]
+  },
+  {
+    level:"TEF-Canada — Résumé Niveau B2",
+    text:"Résumez en vos propres mots le passage suivant, en conservant les idées essentielles et sans reprendre les formulations du texte original : « L'intelligence artificielle transforme profondément le monde du travail en automatisant des tâches autrefois réservées à l'humain, ce qui soulève des questions fondamentales sur l'avenir de l'emploi et la reconversion professionnelle à grande échelle. »",
+    constraints:["80 à 100 mots","Reformulation obligatoire (ne pas copier)","Conserver toutes les idées clés","Votre propre style"]
+  }
+];
+
+const CONNECTORS = [
+  { label:"Cause", chips:["car","parce que","en raison de","étant donné que","vu que","puisque"] },
+  { label:"Conséquence", chips:["donc","ainsi","c'est pourquoi","par conséquent","de ce fait","si bien que"] },
+  { label:"Concession", chips:["bien que","même si","certes","toutefois","néanmoins","pourtant","or"] },
+  { label:"Addition", chips:["de plus","par ailleurs","en outre","qui plus est","d'autant plus que","non seulement…mais encore"] },
+  { label:"Illustration", chips:["par exemple","à titre d'exemple","tel que","c'est le cas de","notamment","ainsi"] },
+  { label:"Conclusion", chips:["en conclusion","en définitive","pour conclure","en somme","finalement","tout compte fait"] }
+];
+
+const READING_TEXTS = [
+  {
+    source:"Texte journalistique — Adapté du Monde, 2024",
+    content:`<p>La fracture numérique, longtemps perçue comme un phénomène transitoire lié à l'accès aux équipements informatiques, révèle aujourd'hui une nature bien plus complexe. Si l'équipement en smartphones et en connexions haut débit s'est généralisé, de nouvelles inégalités émergent, fondées non plus sur la possession d'outils, mais sur les compétences à les utiliser de manière critique et productive.</p>
+    <p>Des études récentes démontrent que cette « littératie numérique », définie comme la capacité à évaluer, produire et partager de l'information en ligne de façon éclairée, varie considérablement selon le niveau d'éducation, la génération et le milieu socio-économique. Paradoxalement, les plus jeunes, souvent qualifiés de « natifs numériques », excellent dans les usages récréatifs mais peinent à mobiliser ces outils à des fins professionnelles ou citoyennes.</p>
+    <p>Les enjeux dépassent largement la sphère individuelle : dans un contexte de désinformation galopante et de polarisation des débats publics, la capacité à naviguer avec discernement dans l'écosystème numérique devient une compétence civique fondamentale. Les politiques éducatives peinent néanmoins à intégrer cette dimension dans des curriculums déjà surchargés.</p>`,
+    questions: [
+      { q:"Quelle est l'idée principale de ce texte ?", opts:["L'accès aux équipements informatiques reste insuffisant","La fracture numérique concerne désormais les compétences, pas les équipements","Les jeunes sont les plus touchés par la fracture numérique","L'éducation numérique est bien intégrée dans les programmes scolaires"], ans:1 },
+      { q:"Que signifie 'littératie numérique' selon le texte ?", opts:["Posséder un smartphone et une connexion","La capacité à coder des applications","Évaluer, produire et partager l'information en ligne de façon éclairée","Utiliser les réseaux sociaux quotidiennement"], ans:2 },
+      { q:"Quel paradoxe le texte soulève-t-il concernant les jeunes ?", opts:["Ils n'ont pas accès aux outils numériques","Ils maîtrisent les usages récréatifs mais pas les usages professionnels","Ils refusent d'utiliser les nouvelles technologies","Ils sont plus compétents que les adultes en tout"], ans:1 }
+    ]
+  },
+  {
+    source:"Texte scientifique — Adapté de Pour la Science, 2024",
+    content:`<p>La neuroplasticité désigne la capacité du cerveau à se modifier structurellement et fonctionnellement en réponse aux expériences, aux apprentissages et aux stimulations environnementales. Longtemps considérée comme un phénomène exclusivement infantile, la science a établi que cette plasticité se maintient — avec une intensité certes réduite — tout au long de la vie adulte.</p>
+    <p>Les recherches en neurosciences cognitives ont révélé que l'apprentissage d'une langue étrangère constitue l'un des stimuli les plus puissants pour induire des modifications durables dans l'architecture cérébrale. L'acquisition de nouvelles structures grammaticales et phonologiques active des régions cérébrales qui restent relativement dormantes chez les monolingues, renforçant notamment les connexions entre l'hippocampe et le cortex préfrontal.</p>
+    <p>Ces découvertes ont des implications directes pour les stratégies pédagogiques : elles plaident en faveur d'une exposition intensive et variée à la langue cible, privilégiant l'immersion active aux exercices répétitifs mécaniques. La motivation intrinsèque joue par ailleurs un rôle modulateur considérable sur l'intensité des transformations neurologiques observées.</p>`,
+    questions: [
+      { q:"Qu'est-ce que la neuroplasticité ?", opts:["La rigidité du cerveau adulte","La capacité du cerveau à se modifier selon les expériences","La structure anatomique des neurones","Un phénomène uniquement infantile"], ans:1 },
+      { q:"Selon le texte, qu'apporte l'apprentissage d'une langue étrangère ?", opts:["Rien de particulier sur le plan neurologique","Des modifications durables dans l'architecture cérébrale","Un développement uniquement de la mémoire à court terme","Une réduction de l'activité cérébrale"], ans:1 },
+      { q:"Quelle stratégie pédagogique le texte recommande-t-il ?", opts:["Les exercices répétitifs mécaniques","L'apprentissage tardif uniquement","Une exposition intensive et variée, avec immersion active","Des cours théoriques exclusivement"], ans:2 }
+    ]
+  }
+];
+
+const LEVEL_TOPICS = [
+  "Conjugaison des temps du passé","Conjugaison du subjonctif","Conjugaison du conditionnel","Accord du participe passé","Pronoms relatifs","Vocabulaire — Société & Immigration","Vocabulaire — Environnement","Vocabulaire — Économie","Compréhension écrite (textes longs)","Compréhension orale","Expression écrite — Lettre formelle","Expression écrite — Texte argumentatif","Connecteurs logiques","Registres de langue","Phonétique & Intonation","Lecture rapide & repérage","Prise de notes efficace","Résumé de texte","Débat et argumentation orale","Culture générale francophone"
+];
+
+// ══════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════
+let quizState = { domain:'comp', idx:0, score:0, answered:false };
+let scores = load('fr-scores', { comp:0, gram:0, voc:0 });
+let levels = load('fr-levels', {});
+let writings = load('fr-writings', {});
+let readingScores = load('fr-reading', { r0:0, r1:0 });
+
+function load(k, d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch{return d;} }
+function save(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch{} }
+
+// ══════════════════════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════════════════════
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200); }
+
+// ══════════════════════════════════════════════════════════
+// SCORE BANNER
+// ══════════════════════════════════════════════════════════
+function updateScoreBanner(){
+  const setBar=(id,val,max)=>{
+    const el=document.getElementById('sc-'+id);
+    const bar=document.getElementById('bar-'+id);
+    if(!el||!bar)return;
+    el.innerHTML=val+'<span class="score-total">'+(max===100?'%':'/'+max)+'</span>';
+    setTimeout(()=>bar.style.width=(val/max*100)+'%',300);
+  };
+  setBar('comp', scores.comp, 5);
+  setBar('gram', scores.gram, 5);
+  setBar('voc', scores.voc, 5);
+  const lvlPct = computeLevelPct();
+  setBar('level', lvlPct, 100);
+  document.getElementById('sc-level').innerHTML=lvlPct+'<span class="score-total">%</span>';
+  document.getElementById('nav-score').textContent='Score global : '+Math.round((scores.comp+scores.gram+scores.voc)/15*100)+'%';
+}
+
+function computeLevelPct(){
+  const vals = Object.values(levels);
+  if(!vals.length)return 0;
+  return Math.round(vals.reduce((a,b)=>a+b,0)/(LEVEL_TOPICS.length*5)*100);
+}
+
+// ══════════════════════════════════════════════════════════
+// QUIZ
+// ══════════════════════════════════════════════════════════
+function switchQuiz(domain){
+  quizState = { domain, idx:0, score:0, answered:false };
+  document.querySelectorAll('#quiz ~ * .tab, .tabs .tab').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('result-screen').classList.remove('show');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const { domain, idx, score } = quizState;
+  const qs = QUIZ_DATA[domain];
+  const area = document.getElementById('quiz-area');
+  const progress = document.getElementById('quiz-progress');
+  const scoreLive = document.getElementById('quiz-score-live');
+
+  progress.textContent = `Question ${idx+1} / ${qs.length}`;
+  scoreLive.textContent = `Score : ${score}`;
+
+  if(idx >= qs.length){
+    area.innerHTML='';
+    const rs = document.getElementById('result-screen');
+    const bigScore = document.getElementById('result-score-big');
+    const msg = document.getElementById('result-msg');
+    bigScore.textContent = score+'/'+qs.length;
+    const pct = Math.round(score/qs.length*100);
+    const msgs = ['Continuez à vous entraîner — chaque erreur est un progrès.','Bon début ! Revoyez les notions manquées.','Bien ! Vous avancez sur la bonne voie.','Très bien ! Encore quelques efforts pour exceller.','Excellent ! Vous maîtrisez ce domaine.'];
+    msg.textContent = msgs[Math.min(Math.floor(pct/20), 4)];
+    scores[domain] = score;
+    save('fr-scores', scores);
+    updateScoreBanner();
+    rs.classList.add('show');
+    document.getElementById('retry-btn').onclick = ()=>{ switchQuiz(domain); };
+    return;
+  }
+
+  const q = qs[idx];
+  quizState.answered = false;
+  area.innerHTML = `
+    <div class="question-card">
+      <div class="question-type">${q.type}</div>
+      <div class="question-text">${q.q}</div>
+      <div class="options">
+        ${q.opts.map((o,i)=>`
+          <div class="option" data-i="${i}" onclick="answerQuiz(${i})">
+            <div class="option-letter">${String.fromCharCode(65+i)}</div>
+            <span>${o}</span>
+          </div>`).join('')}
+      </div>
+      <div class="feedback" id="feedback"></div>
+    </div>`;
+}
+
+function answerQuiz(chosen){
+  if(quizState.answered)return;
+  quizState.answered = true;
+  const q = QUIZ_DATA[quizState.domain][quizState.idx];
+  const opts = document.querySelectorAll('.option');
+  const fb = document.getElementById('feedback');
+  opts.forEach(o=>o.classList.add('disabled'));
+  opts[q.ans].classList.add('correct');
+  if(chosen !== q.ans){ opts[chosen].classList.add('wrong'); }
+  else{ quizState.score++; }
+  fb.textContent = (chosen===q.ans?'✓ Correct — ':'✗ Incorrect — ') + q.exp;
+  fb.className = 'feedback show '+(chosen===q.ans?'good':'bad');
+  setTimeout(()=>{
+    quizState.idx++;
+    renderQuestion();
+  }, 2800);
+}
+
+// ══════════════════════════════════════════════════════════
+// GRAMMAIRE
+// ══════════════════════════════════════════════════════════
+let currentGramTab = 'temps';
+function switchGram(key){
+  currentGramTab = key;
+  document.querySelectorAll('#grammaire .tab').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+  renderGram();
+}
+function renderGram(){
+  const data = GRAMMAR_DATA[currentGramTab]||[];
+  const el = document.getElementById('gram-content');
+  el.innerHTML = data.map(r=>`
+    <div class="grammar-rule">
+      <div class="rule-title">${r.title}</div>
+      <div class="rule-body">${r.body}</div>
+      <div class="rule-example">Exemple : ${r.ex}</div>
+      <div class="rule-tip">💡 ${r.tip}</div>
+    </div>`).join('');
+}
+
+// ══════════════════════════════════════════════════════════
+// VOCABULAIRE
+// ══════════════════════════════════════════════════════════
+let currentVocabTab = 'soc';
+function switchVocab(key){
+  currentVocabTab = key;
+  document.querySelectorAll('#vocabulaire .tab').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+  renderVocab();
+}
+function renderVocab(){
+  const data = VOCAB_DATA[currentVocabTab]||[];
+  const grid = document.getElementById('vocab-grid');
+  grid.innerHTML = data.map(v=>`
+    <div class="vocab-card" onclick="this.classList.toggle('flipped')">
+      <div class="vocab-word">${v.w}</div>
+      <div class="vocab-cat">${v.cat}</div>
+      <div class="vocab-def">${v.def}</div>
+      <div class="vocab-example">« ${v.ex} »</div>
+      <div class="vocab-flip">Cliquez pour retourner<br/><br/><strong>${v.w}</strong><br/><em>${v.def}</em></div>
+    </div>`).join('');
+}
+
+// ══════════════════════════════════════════════════════════
+// EXPRESSION ÉCRITE
+// ══════════════════════════════════════════════════════════
+let currentPromptIdx = 0;
+function switchPrompt(i){
+  currentPromptIdx = i;
+  document.querySelectorAll('#expression .tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('#expression .tab')[i].classList.add('active');
+  renderPrompt();
+}
+function renderPrompt(){
+  const p = WRITING_PROMPTS[currentPromptIdx];
+  const el = document.getElementById('writing-prompt');
+  el.innerHTML = `
+    <div class="prompt-level">${p.level}</div>
+    <div class="prompt-text">${p.text}</div>
+    <div class="prompt-constraints">${p.constraints.map(c=>`<span>· ${c}</span>`).join('')}</div>`;
+  const area = document.getElementById('writing-area');
+  area.value = writings['prompt_'+currentPromptIdx] || '';
+  updateWordCount();
+}
+function updateWordCount(){
+  const txt = document.getElementById('writing-area').value.trim();
+  const n = txt ? txt.split(/\s+/).length : 0;
+  const el = document.getElementById('word-count');
+  el.textContent = n+' mot(s) — Objectif : '+WRITING_PROMPTS[currentPromptIdx].constraints[0];
+  el.style.color = n >= 180 ? 'var(--sage)' : n >= 100 ? 'var(--gold)' : 'var(--muted)';
+}
+function saveWriting(){
+  writings['prompt_'+currentPromptIdx] = document.getElementById('writing-area').value;
+  save('fr-writings', writings);
+  toast('Texte sauvegardé ✓');
+}
+function renderConnectors(){
+  const area = document.getElementById('connectors-area');
+  area.innerHTML = CONNECTORS.map(g=>`
+    <div class="conn-group">
+      <div class="conn-label">${g.label}</div>
+      <div class="conn-chips">${g.chips.map(c=>`<span class="chip" onclick="insertConnector('${c}')">${c}</span>`).join('')}</div>
+    </div>`).join('');
+}
+function insertConnector(text){
+  const area = document.getElementById('writing-area');
+  const start = area.selectionStart, end = area.selectionEnd;
+  area.value = area.value.substring(0,start) + text + area.value.substring(end);
+  area.focus();
+  area.selectionStart = area.selectionEnd = start + text.length;
+  updateWordCount();
+}
+
+// ══════════════════════════════════════════════════════════
+// COMPRÉHENSION
+// ══════════════════════════════════════════════════════════
+let currentReadingIdx = 0;
+function switchReading(i){
+  currentReadingIdx = i;
+  document.querySelectorAll('#comprehension .tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('#comprehension .tab')[i].classList.add('active');
+  renderReading();
+}
+function renderReading(){
+  const t = READING_TEXTS[currentReadingIdx];
+  const area = document.getElementById('reading-area');
+  area.innerHTML = `
+    <div class="reading-text">
+      <div class="reading-source">${t.source}</div>
+      ${t.content}
+    </div>
+    <div class="quiz-container">
+      ${t.questions.map((q,qi)=>`
+        <div class="question-card" id="rq-${qi}">
+          <div class="question-type">Question ${qi+1}</div>
+          <div class="question-text">${q.q}</div>
+          <div class="options">
+            ${q.opts.map((o,oi)=>`
+              <div class="option" data-i="${oi}" onclick="answerReading(${currentReadingIdx},${qi},${oi})">
+                <div class="option-letter">${String.fromCharCode(65+oi)}</div>
+                <span>${o}</span>
+              </div>`).join('')}
+          </div>
+          <div class="feedback" id="rfb-${qi}"></div>
+        </div>`).join('')}
+    </div>`;
+}
+function answerReading(ri, qi, chosen){
+  const q = READING_TEXTS[ri].questions[qi];
+  const card = document.getElementById('rq-'+qi);
+  if(card.querySelector('.option.correct')||card.querySelector('.option.wrong'))return;
+  const opts = card.querySelectorAll('.option');
+  opts.forEach(o=>o.classList.add('disabled'));
+  opts[q.ans].classList.add('correct');
+  if(chosen!==q.ans) opts[chosen].classList.add('wrong');
+  const fb = document.getElementById('rfb-'+qi);
+  fb.textContent = chosen===q.ans ? '✓ Bonne réponse !' : '✗ La réponse correcte est : '+q.opts[q.ans];
+  fb.className = 'feedback show '+(chosen===q.ans?'good':'bad');
+  if(chosen===q.ans){ readingScores['r'+ri]=(readingScores['r'+ri]||0)+1; save('fr-reading',readingScores); }
+}
+
+// ══════════════════════════════════════════════════════════
+// NIVEAU TRACKER
+// ══════════════════════════════════════════════════════════
+function renderLevelGrid(){
+  const grid = document.getElementById('level-grid');
+  const notes = ['','Notions vues','En pratique','Bien compris','Maîtrisé','Expert'];
+  grid.innerHTML = LEVEL_TOPICS.map((topic,i)=>{
+    const v = levels['t'+i]||0;
+    return `<div class="level-card reveal">
+      <div class="level-name">${topic}</div>
+      <div class="stars-row" data-ti="${i}">
+        ${[1,2,3,4,5].map(n=>`<button class="star-btn" data-val="${n}" onclick="setLevel(${i},${n})">${n<=v?'★':'☆'}</button>`).join('')}
+      </div>
+      <div class="level-note" id="ln-${i}">${notes[v]||'Non évalué'}</div>
+    </div>`;
+  }).join('');
+}
+function setLevel(ti, val){
+  const notes=['','Notions vues','En pratique','Bien compris','Maîtrisé','Expert'];
+  levels['t'+ti]=val;
+  save('fr-levels',levels);
+  renderLevelGrid();
+  updateScoreBanner();
+  toast(LEVEL_TOPICS[ti]+' : '+notes[val]);
+  setTimeout(setupReveal,100);
+}
+
+
+// ══════════════════════════════════════════════════════════
+// TECFÉE DATA
+// ══════════════════════════════════════════════════════════
+const TECFEE_ORTHO_GRAM = [
+  { q:"Choisissez la forme correcte :", phrase:"Les élèves que j'ai ___ étaient attentifs.", opts:["observés","observé","observer","observaient"], ans:0, exp:"Le COD 'que' (= les élèves, masculin pluriel) est placé AVANT le verbe 'observer'. Le participe passé s'accorde : observés." },
+  { q:"Laquelle de ces phrases est correcte ?", phrase:"", opts:["Elle s'est souvenu de la règle.","Elle s'est souvenue de la règle.","Elle s'est souvenues de la règle.","Elle s'est souvenait de la règle."], ans:1, exp:"Se souvenir est un verbe essentiellement pronominal. Le participe s'accorde avec le sujet : 'elle' → souvenue." },
+  { q:"Complétez correctement :", phrase:"Les consignes qu'il nous ___ paraissaient claires.", opts:["avait données","avait donné","avait donnés","avaient données"], ans:0, exp:"COD 'que' (= les consignes, féminin pluriel) est avant 'avait données'. Auxiliaire avoir + COD avant → accord au féminin pluriel." },
+  { q:"Choisissez la forme verbale correcte :", phrase:"Il faudrait que les enseignants ___ mieux préparés.", opts:["soient","sont","seront","seraient"], ans:0, exp:"'Il faudrait que' déclenche le subjonctif. La forme subjonctif de 'être' à la 3e personne du pluriel est 'soient'." },
+  { q:"Quelle est la phrase correcte ?", phrase:"", opts:["Bien qu'ils avaient travaillé, les résultats furent décevants.","Bien qu'ils aient travaillé, les résultats furent décevants.","Bien que ils ont travaillé, les résultats furent décevants.","Bien qu'ils travailleraient, les résultats furent décevants."], ans:1, exp:"'Bien que' exige le subjonctif passé : 'aient travaillé'. Jamais d'indicatif après 'bien que'." },
+  { q:"Choisissez la forme correcte :", phrase:"Les deux enseignantes se sont ___ à la direction.", opts:["plaintes","plaints","plaint","plaint(e)s"], ans:0, exp:"Se plaindre est pronominal. Le participe s'accorde avec le sujet (féminin pluriel) : plaintes." },
+];
+
+const TECFEE_ORTHO_LEX = [
+  { q:"Quel est l'orthographe correct ?", phrase:"", opts:["acueil","accueil","accuielle","acueuil"], ans:1, exp:"Accueil prend deux 'c'. Famille : accueillir, accueillant. Piège classique au TECFÉE." },
+  { q:"Choisissez l'orthographe correcte du mot :", phrase:"La ___ des élèves a été observée.", opts:["behavieur","behaviour","comportement","comportment"], ans:2, exp:"En français québécois soutenu et pédagogique, on dit 'comportement', jamais l'anglicisme 'behaviour/behavieur'." },
+  { q:"Quel mot est correctement orthographié ?", phrase:"", opts:["apareil","appareil","appereil","aparel"], ans:1, exp:"Appareil : a-p-p-a-r-e-i-l. Deux 'p'. Famille : appareillage, s'appareiller." },
+  { q:"Laquelle de ces formes est correcte ?", phrase:"L'enseignant a fait preuve d'une grande ___.", opts:["bienveillance","bienveillence","bienveillanse","bienveilance"], ans:0, exp:"Bienveillance : b-i-e-n-v-e-i-l-l-a-n-c-e. Deux 'l'. Famille : veiller, surveillance, merveilleuse." },
+  { q:"Orthographe correcte :", phrase:"Le ___ pédagogique a été modifié.", opts:["curriculum","curriculom","curiculum","curricullum"], ans:0, exp:"Curriculum (mot latin francisé) : c-u-r-r-i-c-u-l-u-m. Deux 'r', un seul 'l'." },
+];
+
+const TECFEE_SYNTAXE = [
+  { q:"Quelle phrase est syntaxiquement correcte ?", phrase:"", opts:["Étant donné les circonstances, le cours a été annulé.","Étant donné les circonstances, le cours était annulé par eux.","Vu que les circonstances, le cours fut annulé.","Compte tenu que les circonstances, l'annulation."], ans:0, exp:"'Étant donné + nom sans verbe' est correct en début de phrase. Les autres constructions sont incorrectes syntaxiquement." },
+  { q:"Repérez l'erreur de ponctuation :", phrase:"", opts:["L'enseignant, fatigué, a quand même terminé son cours.","Les élèves ont remis leurs travaux, cependant certains étaient incomplets.","Je dois corriger ces travaux, mais, je manque de temps.","Trois matières sont au programme : français, mathématiques et sciences."], ans:2, exp:"La virgule avant 'mais' est correcte, mais la virgule après 'mais' est fautive. 'Mais' ne se détache pas ainsi." },
+  { q:"Choisissez la phrase sans erreur syntaxique :", phrase:"", opts:["C'est lui qui a corrigé les copies qui était satisfait.","C'est lui, qui était satisfait, qui a corrigé les copies.","Lui qui était satisfait a corrigé les copies, qui.","C'est les copies qui était satisfait par lui."], ans:1, exp:"L'enchaînement des relatives doit être clair. Seule la 2e version détache correctement les propositions sans ambiguïté." },
+  { q:"Quelle formulation est correcte en français soutenu écrit ?", phrase:"", opts:["Suite à votre demande, veuillez trouver ci-joint.","A la suite de votre demande, veuillez trouver ci-joint.","Suite à votre demande veuillez trouvez ci-joint.","À la suite de votre demande, veuillez trouver ci-joint."], ans:3, exp:"'Suite à' seul est critiqué dans le registre soutenu. La forme correcte est 'À la suite de'. L'accent sur À est obligatoire." },
+];
+
+const TECFEE_PEDAGO = [
+  { w:"La différenciation pédagogique", ctx:"Didactique", def:"Approche consistant à adapter l'enseignement aux besoins, aux rythmes et aux styles d'apprentissage de chaque élève.", ex:"La différenciation pédagogique peut porter sur le contenu, le processus ou la production attendue." },
+  { w:"L'évaluation formative", ctx:"Évaluation scolaire", def:"Évaluation en cours d'apprentissage visant à réguler l'enseignement et non à sanctionner, contrairement à l'évaluation sommative.", ex:"Les rétroactions régulières constituent une forme d'évaluation formative efficace." },
+  { w:"La compétence transversale", ctx:"Programme québécois", def:"Compétence qui dépasse les frontières disciplinaires et se développe dans l'ensemble des matières (ex. : communication, pensée critique).", ex:"Le programme de formation du Québec identifie neuf compétences transversales à développer chez l'élève." },
+  { w:"L'inclusion scolaire", ctx:"Politique éducative", def:"Principe selon lequel tous les élèves, y compris ceux ayant des besoins particuliers, sont intégrés dans des classes ordinaires.", ex:"L'inclusion scolaire nécessite des ressources et une formation adaptée pour les enseignants." },
+  { w:"Le plan d'intervention", ctx:"Soutien scolaire", def:"Document établi pour un élève ayant des besoins particuliers, décrivant les objectifs, les moyens et les responsabilités de chaque intervenant.", ex:"Le plan d'intervention est élaboré en collaboration avec l'élève, ses parents et les professionnels scolaires." },
+  { w:"La gestion de classe", ctx:"Pratique enseignante", def:"Ensemble des stratégies utilisées par l'enseignant pour créer et maintenir un environnement propice aux apprentissages.", ex:"Une gestion de classe efficace repose sur des règles claires, une routine établie et des relations positives." },
+  { w:"L'orthopédagogie", ctx:"Sciences de l'éducation", def:"Discipline qui se consacre à l'évaluation et à la rééducation des élèves présentant des difficultés d'apprentissage.", ex:"L'orthopédagogue travaille en étroite collaboration avec l'enseignant pour soutenir les élèves en difficulté." },
+  { w:"La littératie", ctx:"Compétence fondamentale", def:"Capacité de lire, d'écrire, de comprendre et d'utiliser l'information écrite dans des contextes de la vie courante.", ex:"Développer la littératie dès le primaire est un enjeu central des politiques éducatives québécoises." },
+  { w:"Le référentiel de compétences", ctx:"Formation des maîtres", def:"Document officiel du MEQ définissant les 12 compétences professionnelles attendues des enseignants québécois.", ex:"Le référentiel de compétences guide la formation initiale et le développement professionnel des enseignants.", },
+  { w:"La communauté d'apprentissage professionnelle", ctx:"Développement professionnel", def:"Groupe d'enseignants qui collaborent régulièrement pour améliorer leurs pratiques et les apprentissages des élèves.", ex:"Les CAP favorisent le partage d'expertise et la réflexion collective sur les pratiques pédagogiques." },
+  { w:"L'accomodation raisonnable", ctx:"Droits scolaires", def:"Ajustement apporté à une règle ou une pratique pour permettre à un élève de participer pleinement à la vie scolaire.", ex:"Accorder du temps supplémentaire à un élève dyslexique est une forme d'accommodation raisonnable." },
+  { w:"Le programme de formation de l'école québécoise (PFÉQ)", ctx:"Curriculum officiel", def:"Document ministériel définissant les domaines d'apprentissage, les compétences et les contenus pour chaque cycle scolaire.", ex:"Tout enseignant au Québec doit maîtriser le PFÉQ de son ordre d'enseignement." },
+];
+
+const TECFEE_EXAM = {
+  duration: 180,
+  sections: [
+    {
+      title:"Partie A — Orthographe grammaticale",
+      meta:"8 questions · 45 secondes par question recommandées",
+      questions:[
+        { q:"Choisissez la phrase correcte :", opts:["Les notes que j'ai attribué sont justes.","Les notes que j'ai attribuées sont justes.","Les notes que j'ai attribués sont justes.","Les notes qu'on a attribuer sont justes."], ans:1, exp:"COD 'que' (= les notes, féminin pluriel) est avant 'attribuées'. Accord obligatoire avec l'auxiliaire avoir." },
+        { q:"Quelle forme est correcte ?", opts:["Elle s'est rendu compte de ses erreurs.","Elle s'est rendue compte de ses erreurs.","Elle s'est rendus compte de ses erreurs.","Elle se rend compte de ses erreurs hier."], ans:0, exp:"'Se rendre compte' est une locution figée : le participe reste invariable car le COD direct n'est pas 'elle' mais l'expression entière." },
+        { q:"Complétez : Les projets ___ par les élèves étaient impressionnants.", opts:["réalisé","réalisés","réaliser","réalisaient"], ans:1, exp:"Participe passé passif accordé avec le sujet 'les projets' (masculin pluriel) → réalisés." },
+        { q:"Quelle phrase est grammaticalement correcte ?", opts:["Bien qu'il était présent, il ne participa pas.","Bien qu'il soit présent, il ne participa pas.","Bien qu'il sera présent, il ne participa pas.","Bien qu'il participait, il était présent."], ans:1, exp:"'Bien que' + subjonctif présent. 'Soit' est la seule forme correcte ici." },
+        { q:"Choisissez la forme correcte du verbe :", opts:["Si les élèves auraient étudié, ils auraient réussi.","Si les élèves avaient étudié, ils auraient réussi.","Si les élèves avaient étudié, ils auraient étudié.","Si les élèves étudieraient, ils réussiraient."], ans:1, exp:"Si + plus-que-parfait → conditionnel passé. Jamais de conditionnel dans la proposition en 'si'." },
+        { q:"Choisissez la forme correcte :", opts:["Les enseignantes se sont regardées dans le miroir.","Les enseignantes se sont regardé dans le miroir.","Les enseignantes se sont regardés dans le miroir.","Les enseignantes s'ont regardées dans le miroir."], ans:0, exp:"Se regarder = verbe pronominal réfléchi, le COD est 'se' (= elles-mêmes). Accord avec le sujet féminin pluriel." },
+        { q:"Quelle phrase est incorrecte ?", opts:["Ayant terminé son cours, l'enseignante rangea ses affaires.","L'enseignante ayant terminé, rangea ses affaires.","Une fois son cours terminé, elle rangea ses affaires.","Après avoir terminé son cours, elle rangea ses affaires."], ans:1, exp:"La virgule après 'terminé' crée une rupture syntaxique incorrecte. La proposition participiale doit être soudée à son support." },
+        { q:"Complétez correctement :", opts:["Quoiqu'il soit difficile, ce travail est réalisable.","Quoiqu'il est difficile, ce travail est réalisable.","Quoique il soit difficile, ce travail est réalisable.","Quoiqu'il sera difficile, ce travail est réalisable."], ans:0, exp:"'Quoique' + subjonctif. Élision obligatoire devant voyelle. 'Quoiqu'il soit' est la seule forme correcte." }
+      ]
+    },
+    {
+      title:"Partie B — Orthographe lexicale",
+      meta:"6 questions · identifiez le mot correctement orthographié",
+      questions:[
+        { q:"Quel mot est correctement orthographié ?", opts:["ensseignement","enseignement","enseigement","enseignament"], ans:1, exp:"Enseignement : e-n-s-e-i-g-n-e-m-e-n-t. Deux 'n' dans le groupe 'gn'. Famille : enseigner, enseignant." },
+        { q:"Choisissez l'orthographe correcte :", opts:["abscence","absence","absance","absense"], ans:1, exp:"Absence : a-b-s-e-n-c-e. Pas de 'c' après le 'b'. Famille : absent, absentéisme." },
+        { q:"Quel mot est bien orthographié ?", opts:["aprentissage","aprentisage","apprentissage","apprentisage"], ans:2, exp:"Apprentissage : deux 'p' et deux 's'. Famille : apprendre, apprenti, apprenti(e)." },
+        { q:"Orthographe correcte du terme :", opts:["surveillance","surveilance","survelance","surveillence"], ans:0, exp:"Surveillance : s-u-r-v-e-i-l-l-a-n-c-e. Deux 'l'. Famille : surveiller, surveillant." },
+        { q:"Quel mot est correct ?", opts:["developement","développement","développment","developpement"], ans:1, exp:"Développement : accent grave sur les deux 'é', deux 'p'. Famille : développer, développeur." },
+        { q:"Choisissez la bonne orthographe :", opts:["bénévolat","bénnévolat","benevolat","bénévolatt"], ans:0, exp:"Bénévolat : b-é-n-é-v-o-l-a-t. Deux accents aigus, un seul 'l', un seul 't'. Famille : bénévole, bénévolement." }
+      ]
+    },
+    {
+      title:"Partie C — Syntaxe & Ponctuation",
+      meta:"6 questions · structures et ponctuation en contexte scolaire",
+      questions:[
+        { q:"Quelle phrase est correctement ponctuée ?", opts:["L'enseignante a dit: que les élèves devaient travailler.","L'enseignante a dit que les élèves devaient travailler.","L'enseignante a dit, que les élèves devaient travailler.","L'enseignante a dit que; les élèves devaient travailler."], ans:1, exp:"Pas de ponctuation entre le verbe déclaratif et la subordonnée complétive introduite par 'que'." },
+        { q:"Repérez la construction syntaxique incorrecte :", opts:["Au vu des résultats, des ajustements s'imposent.","Suite aux résultats, des ajustements s'imposent.","À la lumière des résultats, des ajustements s'imposent.","Compte tenu des résultats, des ajustements s'imposent."], ans:1, exp:"'Suite à' (sans article) est critiqué dans le registre formel. On préfère 'À la suite de', 'En raison de', 'Compte tenu de'." },
+        { q:"Choisissez la phrase syntaxiquement correcte :", opts:["Les élèves ont travaillé fort, c'est pourquoi, ils ont réussi.","Les élèves ont travaillé fort, c'est pourquoi ils ont réussi.","Les élèves ont travaillé fort; c'est pourquoi, ils ont réussi.","Les élèves ont travaillé fort : c'est pourquoi ils ont réussi."], ans:3, exp:"Les deux points introduisent la conséquence. Pas de virgule après 'pourquoi'. La option D est la plus correcte." },
+        { q:"Quelle phrase utilise correctement le point-virgule ?", opts:["Les uns travaillent ; les autres se reposent.","Il est arrivé en retard ; car il a raté l'autobus.","Voici les règles ; primo, respecter autrui.","Elle a lu le texte ; mais elle n'a pas répondu."], ans:0, exp:"Le point-virgule sépare deux propositions indépendantes étroitement liées. Il ne précède pas 'car', 'mais', ni une énumération avec 'primo'." },
+        { q:"Repérez l'erreur syntaxique :", opts:["Ce dont il avait besoin, c'était du soutien.","Ce qu'il lui fallait, c'était du soutien.","Ce à quoi il aspirait, c'était une reconnaissance.","Ce qu'il en a besoin, c'est du soutien."], ans:3, exp:"'Avoir besoin de' + 'ce dont' (non 'ce qu'il en'). La construction correcte est : 'Ce dont il a besoin, c'est...'." },
+        { q:"Laquelle de ces phrases est correcte formellement ?", opts:["Prière de bien vouloir remettre vos travaux avant vendredi.","Prière de bien vouloir remettre vos travaux avant vendredi!","Il est prié à remettre vos travaux avant vendredi.","Vous êtes priés à remettre vos travaux avant vendredi."], ans:0, exp:"'Prière de + infinitif' est la formule impersonnelle correcte dans les communications officielles. Pas de point d'exclamation ni de 'à + infinitif'." }
+      ]
+    }
+  ]
+};
+
+// ══════════════════════════════════════════════════════════
+// TECFÉE STATE
+// ══════════════════════════════════════════════════════════
+let tecfeeTab = 'ortho-gram';
+let tecfeeGramState = { idx:0, score:0, answered:false };
+let tecfeeScores = load('tecfee-scores', { gram:0, lex:0, syn:0 });
+let examState = { active:false, timer:null, seconds:180*60, sectionIdx:0, qIdx:0, totalScore:0, totalQ:0, answered:false };
+
+// ══════════════════════════════════════════════════════════
+// TECFÉE RENDER
+// ══════════════════════════════════════════════════════════
+function switchTecfee(tab){
+  tecfeeTab = tab;
+  document.querySelectorAll('#tecfee .tab').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+  renderTecfee();
+}
+
+function renderTecfee(){
+  const el = document.getElementById('tecfee-content');
+  if(tecfeeTab==='ortho-gram') renderTecfeeQuiz(el, TECFEE_ORTHO_GRAM, 'gram', 'Orthographe grammaticale');
+  else if(tecfeeTab==='ortho-lex') renderTecfeeQuiz(el, TECFEE_ORTHO_LEX, 'lex', 'Orthographe lexicale');
+  else if(tecfeeTab==='syntaxe') renderTecfeeQuiz(el, TECFEE_SYNTAXE, 'syn', 'Syntaxe & Ponctuation');
+  else if(tecfeeTab==='pedago') renderPedago(el);
+  else if(tecfeeTab==='examen') renderExamen(el);
+}
+
+function renderTecfeeQuiz(el, data, key, label){
+  const st = load('tq-'+key, {idx:0,score:0});
+  const idx = st.idx < data.length ? st.idx : 0;
+  const score = st.score || 0;
+  if(st.idx >= data.length){
+    el.innerHTML = `<div class="exam-result show">
+      <div class="exam-result-score">${score}/${data.length}</div>
+      <div class="exam-result-label">${label}</div>
+      <div class="exam-result-msg">${score===data.length?'Parfait ! Maîtrise totale de cette partie.':score>=Math.ceil(data.length*0.75)?'Bien ! Continuez à pratiquer pour consolider.':'Revoyez les règles et recommencez.'}</div>
+      <br/><button class="btn btn-primary" style="background:var(--maple)" onclick="resetTecfeeQuiz('${key}')">Recommencer</button>
+    </div>`;
+    return;
+  }
+  const q = data[idx];
+  el.innerHTML = `
+    <div style="max-width:700px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--parch)">
+        <span style="font-family:var(--mono);font-size:0.7rem;color:var(--muted)">Question ${idx+1} / ${data.length}</span>
+        <span style="font-family:var(--serif);font-size:1.1rem;color:var(--maple);font-weight:700">Score : ${score}</span>
+      </div>
+      <div class="exam-q" id="tq-card">
+        <div class="syntax-instruction">${label}</div>
+        <div class="exam-q-text"><strong>${q.q}</strong>${q.phrase ? '<br/><em style="color:var(--ink2);font-family:var(--serif)">' + q.phrase + '</em>' : ''}</div>
+        <div class="exam-opts">
+          ${q.opts.map((o,i)=>`<div class="exam-opt" data-i="${i}" onclick="answerTecfeeQuiz('${key}',${i})">
+            <div class="exam-letter">${String.fromCharCode(65+i)}</div><span>${o}</span>
+          </div>`).join('')}
+        </div>
+        <div class="exam-feedback" id="tq-fb"></div>
+      </div>
+    </div>`;
+}
+
+function answerTecfeeQuiz(key, chosen){
+  const data = key==='gram'?TECFEE_ORTHO_GRAM:key==='lex'?TECFEE_ORTHO_LEX:TECFEE_SYNTAXE;
+  const st = load('tq-'+key,{idx:0,score:0});
+  if(document.querySelector('.exam-opt.correct')) return;
+  const q = data[st.idx];
+  document.querySelectorAll('.exam-opt').forEach(o=>o.classList.add('disabled'));
+  document.querySelectorAll('.exam-opt')[q.ans].classList.add('correct');
+  if(chosen!==q.ans) document.querySelectorAll('.exam-opt')[chosen].classList.add('wrong');
+  const fb = document.getElementById('tq-fb');
+  fb.textContent = (chosen===q.ans?'✓ Correct — ':'✗ Incorrect — ')+q.exp;
+  fb.className='exam-feedback show '+(chosen===q.ans?'good':'bad');
+  const newScore = chosen===q.ans ? st.score+1 : st.score;
+  setTimeout(()=>{
+    save('tq-'+key,{idx:st.idx+1,score:newScore});
+    tecfeeScores[key]=newScore;
+    save('tecfee-scores',tecfeeScores);
+    updateTecfeeScore();
+    renderTecfee();
+  },2600);
+}
+
+function resetTecfeeQuiz(key){
+  save('tq-'+key,{idx:0,score:0});
+  renderTecfee();
+}
+
+function renderPedago(el){
+  el.innerHTML=`
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:2rem;font-style:italic;font-family:var(--serif)">
+      Vocabulaire essentiel du monde scolaire québécois — indispensable pour les textes du TECFÉE.
+    </p>
+    <div class="pedago-grid">
+      ${TECFEE_PEDAGO.map(v=>`
+        <div class="pedago-card reveal">
+          <div class="pedago-word">${v.w}</div>
+          <div class="pedago-ctx">${v.ctx}</div>
+          <div class="pedago-def">${v.def}</div>
+          <div class="pedago-ex">« ${v.ex} »</div>
+        </div>`).join('')}
+    </div>`;
+  setTimeout(setupReveal,100);
+}
+
+function renderExamen(el){
+  const totalQ = TECFEE_EXAM.sections.reduce((a,s)=>a+s.questions.length,0);
+  el.innerHTML = `
+    <div style="max-width:800px">
+      <div style="background:var(--maple-pale);border:1px solid rgba(192,57,43,0.2);padding:1.5rem;border-radius:2px;margin-bottom:2rem">
+        <div style="font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--maple);margin-bottom:0.5rem">⏱ Simulation TECFÉE — ${totalQ} questions</div>
+        <div style="font-size:0.85rem;color:var(--ink2);margin-bottom:1rem">3 parties · Reproduit les conditions réelles · Seuil de réussite : 75%</div>
+        <div class="exam-timer" id="exam-timer" style="display:none">
+          <div>
+            <div class="timer-display" id="timer-display">--:--</div>
+            <div class="timer-label">Temps restant</div>
+          </div>
+          <div style="font-family:var(--mono);font-size:0.72rem;color:var(--muted);margin-left:auto" id="exam-progress-label">0/${totalQ} répondues</div>
+        </div>
+        <button class="btn btn-primary" style="background:var(--maple)" id="start-exam-btn" onclick="startExam()">Démarrer l'examen blanc →</button>
+      </div>
+      <div id="exam-sections-area"></div>
+      <div class="exam-result" id="exam-final-result">
+        <div class="exam-result-score" id="exam-final-score">0/${totalQ}</div>
+        <div class="exam-result-label">Résultat TECFÉE simulé</div>
+        <div class="exam-result-msg" id="exam-final-msg"></div>
+        <div class="seuil-bar">
+          <div class="seuil-item"><div class="seuil-val seuil-pass">75%</div><div class="seuil-lbl">Seuil de réussite</div></div>
+          <div style="font-size:2rem;color:var(--parch)">|</div>
+          <div class="seuil-item"><div class="seuil-val" id="exam-pct-val" style="color:var(--maple)">0%</div><div class="seuil-lbl">Votre résultat</div></div>
+        </div>
+        <br/><button class="btn btn-primary" style="background:var(--maple);margin-top:1rem" onclick="resetExam()">Recommencer</button>
+      </div>
+    </div>`;
+}
+
+function startExam(){
+  document.getElementById('start-exam-btn').style.display='none';
+  document.getElementById('exam-timer').style.display='flex';
+  const totalQ = TECFEE_EXAM.sections.reduce((a,s)=>a+s.questions.length,0);
+  examState = { active:true, seconds:60*60, totalScore:0, totalQ, answeredCount:0 };
+  examState.timer = setInterval(()=>{
+    examState.seconds--;
+    const m=Math.floor(examState.seconds/60), s=examState.seconds%60;
+    document.getElementById('timer-display').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+    if(examState.seconds<=0){ clearInterval(examState.timer); finalizeExam(); }
+  },1000);
+  renderExamSections();
+}
+
+function renderExamSections(){
+  const area = document.getElementById('exam-sections-area');
+  area.innerHTML = TECFEE_EXAM.sections.map((sec,si)=>`
+    <div class="exam-section">
+      <div class="exam-section-title">${sec.title}</div>
+      <div class="exam-section-meta">${sec.meta}</div>
+      ${sec.questions.map((q,qi)=>`
+        <div class="exam-q" id="eq-${si}-${qi}">
+          <div class="exam-q-text">${q.q}</div>
+          <div class="exam-opts">
+            ${q.opts.map((o,oi)=>`<div class="exam-opt" onclick="answerExam(${si},${qi},${oi})">
+              <div class="exam-letter">${String.fromCharCode(65+oi)}</div><span>${o}</span>
+            </div>`).join('')}
+          </div>
+          <div class="exam-feedback" id="efb-${si}-${qi}"></div>
+        </div>`).join('')}
+    </div>`).join('');
+}
+
+function answerExam(si,qi,chosen){
+  const card = document.getElementById(`eq-${si}-${qi}`);
+  if(card.querySelector('.exam-opt.correct')||card.querySelector('.exam-opt.wrong')) return;
+  const q = TECFEE_EXAM.sections[si].questions[qi];
+  card.querySelectorAll('.exam-opt').forEach(o=>o.classList.add('disabled'));
+  card.querySelectorAll('.exam-opt')[q.ans].classList.add('correct');
+  if(chosen!==q.ans) card.querySelectorAll('.exam-opt')[chosen].classList.add('wrong');
+  const fb = document.getElementById(`efb-${si}-${qi}`);
+  fb.textContent=(chosen===q.ans?'✓ ':'✗ ')+q.exp;
+  fb.className='exam-feedback show '+(chosen===q.ans?'good':'bad');
+  if(chosen===q.ans) examState.totalScore++;
+  examState.answeredCount++;
+  const lbl = document.getElementById('exam-progress-label');
+  if(lbl) lbl.textContent=examState.answeredCount+'/'+examState.totalQ+' répondues';
+  if(examState.answeredCount>=examState.totalQ) setTimeout(finalizeExam,800);
+}
+
+function finalizeExam(){
+  if(examState.timer) clearInterval(examState.timer);
+  const pct = Math.round(examState.totalScore/examState.totalQ*100);
+  const res = document.getElementById('exam-final-result');
+  document.getElementById('exam-final-score').textContent=examState.totalScore+'/'+examState.totalQ;
+  document.getElementById('exam-pct-val').textContent=pct+'%';
+  document.getElementById('exam-pct-val').style.color=pct>=75?'var(--sage)':'var(--maple)';
+  document.getElementById('exam-final-msg').textContent=pct>=75?'Félicitations ! Vous atteignez le seuil de réussite du TECFÉE.':pct>=60?'Proche du seuil. Travaillez davantage les orthographes grammaticale et lexicale.':'Continuez à pratiquer — concentrez-vous sur les règles les plus fréquentes.';
+  res.classList.add('show');
+  res.scrollIntoView({behavior:'smooth'});
+  tecfeeScores.exam = examState.totalScore;
+  save('tecfee-scores', tecfeeScores);
+  updateTecfeeScore();
+}
+
+function resetExam(){
+  if(examState.timer) clearInterval(examState.timer);
+  examState = {};
+  renderTecfee();
+}
+
+function updateTecfeeScore(){
+  const total = (tecfeeScores.gram||0)+(tecfeeScores.lex||0)+(tecfeeScores.syn||0);
+  const maxTotal = TECFEE_ORTHO_GRAM.length+TECFEE_ORTHO_LEX.length+TECFEE_SYNTAXE.length;
+  const el = document.getElementById('sc-tecfee');
+  const bar = document.getElementById('bar-tecfee');
+  if(el) el.innerHTML=total+'<span class="score-total">/'+maxTotal+'</span>';
+  if(bar) setTimeout(()=>bar.style.width=(total/maxTotal*100)+'%',300);
+}
+
+// ══════════════════════════════════════════════════════════
+// REVEAL
+// ══════════════════════════════════════════════════════════
+function setupReveal(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:0.07});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+}
+
+// ══════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', ()=>{
+  // quiz
+  renderQuestion();
+  // gram
+  renderGram();
+  // vocab
+  renderVocab();
+  // writing
+  renderPrompt();
+  renderConnectors();
+  document.getElementById('writing-area').addEventListener('input', updateWordCount);
+  // reading
+  renderReading();
+  // level
+  renderLevelGrid();
+  // scores
+  updateScoreBanner();
+  // tecfée
+  renderTecfee();
+  updateTecfeeScore();
+  // reveal
+  setupReveal();
+  setTimeout(setupReveal, 600);
+});
+
+// Tab switching helpers
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click', function(){ 
+    this.closest('.tabs').querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
